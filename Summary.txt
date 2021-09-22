@@ -15,3 +15,21 @@ DDD
 -In User Migration
    return  new class
 -With Models folder create another folder called Concern ->create trait  HasUuid
+
+CREATE LOCATIONS
+   php artisan make:model Location -mf
+    php artisan make:model Address  -mf
+In realty though a user will have multiple shipping locations :office,home etc
+
+- Housing keeping in Factories
+
+composer require juststeveking/laravel-transporter
+https://postcodes.io/
+https://github.com/JustSteveKing/LaravelPostcodes
+
+
+
+
+
+
+
