@@ -1,0 +1,17 @@
+DDD
+-In the composer.json file
+       "autoload": {
+               "psr-4": {
+                  "Domains\\": "src/Domains"
+-Change version of php ->"php": "^8.3",
+-Create some directories with the
+        Domains
+            Fulfilment ,
+            Customer ,create folder Models
+            Catalog (Business Logic)
+-Move the User Class into Customer/Models
+   -Open the user class file
+   -Select user ->right click->Move Class
+-In User Migration
+   return  new class
+-With Models folder create another folder called Concern ->create trait  HasUuid

@@ -1,0 +1,33 @@
+<?php
+ declare(strict_types=1);
+namespace Domains\Customer\Models;
+
+
+use Domains\Customer\Models\Concerns\HasUuid;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Authenticatable
+{
+    use HasUuid;
+    use HasFactory;
+    use Notifiable;
+    use HasApiTokens;
+
+    protected $fillable = [
+        'uuid',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+    ];
+
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+}
