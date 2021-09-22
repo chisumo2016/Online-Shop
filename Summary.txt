@@ -18,7 +18,7 @@ DDD
 
 CREATE LOCATIONS
    php artisan make:model Location -mf
-    php artisan make:model Address  -mf
+
 In realty though a user will have multiple shipping locations :office,home etc
 
 - Housing keeping in Factories
@@ -27,8 +27,12 @@ composer require juststeveking/laravel-transporter
 https://postcodes.io/
 https://github.com/JustSteveKing/LaravelPostcodes
 
+-Created STUB
+-php artisan stub:publish
+-Avoid confusion later
 
-
+CREATE ADDRESS
+  php artisan make:model Address  -mf
 
 
 
