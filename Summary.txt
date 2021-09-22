@@ -34,6 +34,23 @@ https://github.com/JustSteveKing/LaravelPostcodes
 CREATE ADDRESS
   php artisan make:model Address  -mf
 
+-Moved the HasUuid tO Shared/Models/Concerns
 
+RouteServiceProvider
+-Declare typescript at the top of the file declare(strict_types=1);
+-Change the route  for api
+     Route::prefix('api/v1')
+             ->as('api:v1:')
+             ->middleware('api')
+            // ->namespace($this->namespace)
+             ->group(base_path('routes/api/v1.php'));
+-Routes->create a directory call api
+-Move the api file into it and rename to v1.php
+-❯ php artisan route:list --columns=uri,name,method
 
-
+CONTROLLERS
+php artisan make:controller Api\\V1\\Products\\IndexController --invokable
+php artisan make:controller Api\\V1\\Products\\ShowController --invokable
+php artisan make:controller Web\\Pages\\HomePageCOntroller --invokable
+php artisan make:controller Admin\\Users\\IndexController --invokable
+ php artisan make:controller Web\\Pages\\HomePageController --invokable
