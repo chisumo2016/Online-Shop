@@ -1,0 +1,146 @@
+02:12 | Git vs Github
+    Git
+      Is a version control software
+      Is used as a command line tool and ran locally
+      Tracks code and version history
+      Allows you to work on different versions/branches of a code base
+      Helps to synchronise different versions of the same code base
+         (Local code base , remote code base etc)
+
+    Github (UI)
+      Is a web application that hosts remote git repositories
+      Owned by Microsoft
+      Is deeply integrate with git
+      Provides extra functionality on top of git
+      Mainly used by teams of 2 more people
+
+03:53 | Installing Git
+       https://git-scm.com/downloads
+04:14 | Init Local Repository
+   REMOTE REPOSITORY
+   Are hosted on server that is accessible for all team members
+   developers will see the code
+   developer will push the code to the remote
+
+   LOCAL REPOSITORY
+   Reside on te computer of a team member
+   Other developers won't see the code in local
+   -Code will look different from other
+   -git init
+   -cd "DCD"
+07:26 | Staging Area & Git Tracking
+    git status
+    local area
+    staging area
+      git add .
+      git status
+      git rm --cached test.php
+    commit area
+     git commit -m "..........."
+     -checking point
+     -add manually and you can come back
+     -Store many information
+     -Commit locally in you machine
+     -Take those commit to remote
+     -Pull all commit into local  repository
+
+08:23 | Git Status
+       git status
+10:35 | Add and Remove From Staging Area
+       git add .
+       git rm --cached test.php
+11:41 | Commits
+      git commit -m  "first commit"
+      git status
+
+15:00 | Branches
+     A branch represents an independent line of development,
+     the git branch command lets you
+     create ,
+     list,
+     rename
+     and delete branches
+     MASTER BRANCH
+       -Production code where its lives after tested and approved by sn/manager
+       -Don't modified to master
+
+     DEVELOP BRANCH
+       -Is the copy of master branch has different features
+       git checkout -b develop
+       git status
+       git add .
+       git commit -m "commit to develop"
+       This commit I changed to the developer branch doesn't affect the master branch
+       All the change made in the develop branch lives in develop branch and doesn't reflect to the master
+                git checkout master
+                git checkout develop
+                    one commit ahead of master branch
+                git branch
+                    View all branches
+
+20:48 | Merging Branches
+       We create a develop branch and tested the code ,
+       Code  has been approved /reviewed by manager
+       Time to put into master
+       WE CALL Merge
+         *extend branch
+         master  branch
+         develop branch
+         git checkout master
+         git merge extended
+
+         NB: If the changes has happened to master and bring back to develop branch
+         git merge master
+         git checkout master
+
+
+22:09 | Merge Conflicts
+      Example: Readme.md in local - changed
+      Example: Readme.md in remote - changed
+      The error will shown on code .u need to delete manually top look as u want
+     This happened to file conflicts together during changes
+      git commit -am "cccccc"
+      git checkout develop
+      git commit -am "modified"
+      git checkout master
+      git merge develop
+         Auto-merging test.py
+         CONFLICT : merge conflict in test.py
+         Automatic merge failed;fix conflicts and then commit the result
+         git commit -am "merge extended"
+         git push
+
+25:17 | Remote Repositories
+       -create new repository
+       -Rename the branch to main
+       git checkout master
+       git branch -M main
+       git branch
+       git remote add origin https://............
+       git remote
+       git push -u origin main
+
+       NB OTHER NEW BRANCH
+     You can push other branches to origin
+       git checkout develop
+       git push origin develop
+
+       NB:Go to github ,you will see the message
+            Compare & Pull request Button
+              You can make Draft Pull Request
+
+     You change something in remote repository
+     The main branch in local repo will be behind one_step
+     git checkout main
+     git pull origin master- will pull all the changes from remote rep to local repo
+              -It update local branch  from repos if there changes
+
+31:00 | Git Clone
+   copy the code to ur machine
+   git clone url
+Local Repositories
+Track and Untracked Files
+Staging
+Branches
+Remote Repositories
+Commits

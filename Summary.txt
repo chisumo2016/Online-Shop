@@ -54,3 +54,51 @@ php artisan make:controller Api\\V1\\Products\\ShowController --invokable
 php artisan make:controller Web\\Pages\\HomePageCOntroller --invokable
 php artisan make:controller Admin\\Users\\IndexController --invokable
  php artisan make:controller Web\\Pages\\HomePageController --invokable
+
+EPISODE 2
+Product:
+  attributes:
+    id: int
+    key: string
+    name: string
+    description: medium text
+    cost: int (pence/cent/etc)
+    retail: int
+    active: boolean
+    vat: boolean (do we need to charge VAT for this product)
+
+  relationships:
+    category: belongsTo
+    ranges: belongsToMany
+    variants: hasMany  // color, size ,
+
+   CREATE MODEL , MIGRATION & FACTORY
+         php artisan make:model Category -mf
+         php artisan make:model Range  -mf
+-Add attributes to the migration
+     Category and Range
+-Move all above models to Domains\Catalog\Models
+-Add the Mass Assigment  to all model
+-add use HasKey; for both
+ Package  for key
+    composer require juststeveking/laravel-key-factory
+     php artisan vendor:publish select 15 key-factory-config
+NB any public will have key but any internal will have Uuuid(not friendly in web interface)
+-Add faker in both models
+-php migrate
+
+- Add this static method to every models for factory
+ protected static function newFactory() :Factory
+    {
+        return  CategoryFactory::new();
+        //return  new AddressFactory();
+    }
+php artisan migrate:fresh --seed
+
+EVENT SOURCE VIDEO
+https://www.youtube.com/watch?v=aoaBU__dfDw
+https://www.youtube.com/watch?v=aoaBU__dfDw
+https://en.wikipedia.org/wiki/Event_storming#:~:text=Event%20storming%20is%20a%20workshop,notes%20on%20a%20wide%20wall
+
+NOTION - BUILDING ONLINE STORE
+https://juststeveking.notion.site/Let-s-build-an-online-store-cfdc33868f9e46b0a11b86bfa76092a2
