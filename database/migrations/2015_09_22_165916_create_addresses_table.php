@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('label'); //home, office , Head office/
             $table->boolean('billing')->default(false);//Billing/shipping
 
-            $table->foreignId('user_id')->index();
-            $table->foreignId('location_id')->index();
+            $table->foreignId('user_id')->index()->constrained();
+            $table->foreignId('location_id')->index()->constrained();
             $table->timestamps();
         });
     }

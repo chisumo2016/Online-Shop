@@ -56,22 +56,6 @@ php artisan make:controller Admin\\Users\\IndexController --invokable
  php artisan make:controller Web\\Pages\\HomePageController --invokable
 
 EPISODE 2
-Product:
-  attributes:
-    id: int
-    key: string
-    name: string
-    description: medium text
-    cost: int (pence/cent/etc)
-    retail: int
-    active: boolean
-    vat: boolean (do we need to charge VAT for this product)
-
-  relationships:
-    category: belongsTo
-    ranges: belongsToMany
-    variants: hasMany  // color, size ,
-
    CREATE MODEL , MIGRATION & FACTORY
          php artisan make:model Category -mf
          php artisan make:model Range  -mf
@@ -94,6 +78,48 @@ NB any public will have key but any internal will have Uuuid(not friendly in web
         //return  new AddressFactory();
     }
 php artisan migrate:fresh --seed
+
+Product:
+  attributes:
+    id: int
+    key: string
+    name: string
+    description: medium text
+    cost: int (pence/cent/etc)
+    retail: int
+    active: boolean
+    vat: boolean (do we need to charge VAT for this product)
+
+  relationships:
+    category: belongsTo
+    ranges: belongsToMany
+    variants: hasMany  // color, size ,
+
+CREATE  MODEL MIGRATION AND FACTORY  PRODUCT
+  php artisan make:model Product  -mf
+-Create all the attributes for pruducts table
+-Move to the Domains\Catalog\Models
+-Add all Mass Assigment to both models
+-Add this static method to both models
+   protected static function newFactory() :Factory
+       {
+           return  CategoryFactory::new();
+           //return  new AddressFactory();
+       }
+-Create a stub into model to resolve the issue above
+-We made some change by alter the users migration
+   php artisan make:migration alter_table_users_add_billing_and_shipping_constraint --table=users
+
+   CREATE OUR FACTORY PRODUCTS
+-add faker in the product factory
+-create shop file in config to control vat
+-Add to env.php and env.php.example
+-Create /Add ProductFactor to the databaseseeder
+
+
+
+
+
 
 EVENT SOURCE VIDEO
 https://www.youtube.com/watch?v=aoaBU__dfDw
