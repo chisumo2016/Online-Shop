@@ -145,6 +145,32 @@ CREATE MODELS BUILDERS
 -Go to RangeBuilder as use traits
        use HasActiveScope;
 
+git add .
+
+This scope will help top share among our buildeers
+
+VARIANT MODULE
+MAKE MODEL AND MIGRATION FOR VARIANT
+-Create Variant Model & Migration
+   php artisan make:model Variant -mf
+-Do dump autoload composer dump-autoload
+-Create the  attributes migration for variant
+-Move model Variant to Domains
+    Domains\Catalog\Models
+-Add Mass Assigment and casts
+
+VARIANT BUILDER
+ -Create a file for Variant Builders
+ -Extend Illuminate\Database\Eloquent\Builder
+ - Add use HasActiveScope;
+- add some scope within the Variant Builders
+-Add attribute to the VariantFactory
+-Add the Variant to the database seeder
+
+
+
+
+
 
 EVENT SOURCE VIDEO
 https://www.youtube.com/watch?v=aoaBU__dfDw
