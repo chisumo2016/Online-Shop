@@ -116,9 +116,34 @@ CREATE  MODEL MIGRATION AND FACTORY  PRODUCT
 -Add to env.php and env.php.example
 -Create /Add ProductFactor to the databaseseeder
 
+RELATIONSHIP OF MODELS
+- Add some relationship to both models Category Product Range
 
+CREATE MODELS BUILDERS
+-Create a directory Builders
+-Inside the  Domains\Catalog\Models\Builder
+-Create three Builders
+      CategoryBuilder -extend to Illuminate\Database\Eloquent\Builder
+      RangeBuilder    -extend to Illuminate\Database\Eloquent\Builder
+      ProductBuilder  -extend to Illuminate\Database\Eloquent\Builder
 
+- To each class we  write the function newEloquentBuilder
+      what the purpose of Builder is to use the common thing they share live active attributes
 
+-Create builders folder in src/Domains/Shared/Models/Builders
+-Within the Builders folder create another folder called Shared
+- Shared/Models/Builders/Shared
+-Create a new traits  (HasActiveScope)
+-Select template trait
+-Declare : declare(strict_types=1);
+-withing the trait write to function for "active"
+
+-Go to CategoryBuilder as use traits
+       use HasActiveScope;
+-Go to ProductBuilder as use traits
+       use HasActiveScope;
+-Go to RangeBuilder as use traits
+       use HasActiveScope;
 
 
 EVENT SOURCE VIDEO
