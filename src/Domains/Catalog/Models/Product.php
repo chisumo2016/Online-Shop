@@ -31,7 +31,8 @@ class Product extends Model
     ];
 
     protected  $casts = [
-        'active' => 'boolean'
+        'active' => 'boolean',
+        'vat' => 'boolean'
     ];
 
     public  function category()  :BelongsTo
@@ -48,6 +49,14 @@ class Product extends Model
         return $this->BelongsTo(
             related: Range::class,
             foreignKey: 'range_id'
+        );
+    }
+
+    public  function variants() :HasMany
+    {
+        return $this->hasMany(
+            related: Variant::class,
+            foreignKey: 'product_id'
         );
     }
 

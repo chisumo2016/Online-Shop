@@ -167,10 +167,114 @@ VARIANT BUILDER
 -Add attribute to the VariantFactory
 -Add the Variant to the database seeder
 
+php artisan migrate:fresh --seed
+
+API IMPLEMENTATION
+-Products endpoint
+  http://shop-app.test/api/v1/products
+-We need to get active product and variants
+-Install this package composer require spatie/laravel-query-builder
+   Read Documentation
+        https://github.com/spatie/laravel-query-builder
+        https://spatie.be/docs/laravel-query-builder/v3/introduction
+-Let us use inside the api controller of products
+
+TEST AN API ENDPOINTS
+ http://shop-app.test/api/v1/products
+ http://shop-app.test/api/v1/products?include=variants
+
+RETURNING HTTP RESPONSE STATUS CODE
+-Use this package composer require juststeveking/http-status-code
+-use the package to return status response
+-Test the api endpoint
+  http://shop-app.test/api/v1/products
+  http://shop-app.test/api/v1/products?include=variants
+
+ MAKE A RESOURCE
+-Make a api products resource
+   php artisan make:resource Api\\V1\\ProductResource
+   php artisan make:resource Api\\V1\\CategoryResource
+   php artisan make:resource Api\\V1\\RangeResource
+   php artisan make:resource Api\\V1\\VariantResource
+
+-replace data: $product from indexController to use resource
+
+ ERRORS
+   Declaration of App\Http\Resources\Api\V1\ProductResource::toArray(Illuminate\Http\Request $request):
+   array must be compatible with Illuminate\Http\Resources\Json\JsonResource::toArray($request)
+
+ANSWERS
+  -Remove the Request in the ProductResource
+  -Also clean the stub as well
+  Try again to access  OK
+-Build the rest of resource
+     php artisan make:resource Api\\V1\\CategoryResource
+     php artisan make:resource Api\\V1\\RangeResource
+     php artisan make:resource Api\\V1\\VariantResource
+-return all attribute which u want to be appeared on api
+-Go to ProductResource and return all attributes and relationship
+   NB: Read Documentation
+-Test API endpoint with Resource
+     http://shop-app.test/api/v1/products
+     http://shop-app.test/api/v1/products?include=variants
+     http://shop-app.test/api/v1/products?include=category will fail ,
+      Add the includes: ['variants','category'] in indexController
+     Add all    includes: ['category','range','variants']
+
+CATEGORY RESOURCE
+-We need to return some attributes in CategoryResource
+-add all logic into it
+-Test API endpoint with Resource
+    http://shop-app.test/api/v1/products?include=category
+ ERROR OCCURED
+     InvalidArgumentException
+     Maximum stack depth exceeded
+
+ SOLUTION: Ignore the relationship
+
+RANGE RESOURCE
+- Add the return attributes in RangeResource
+-Test API endpoint
+  http://shop-app.test/api/v1/products?include=category,range
+  http://shop-app.test/api/v1/products?include=category,range,variants
+-Add links to the ProductResource
+   'links' =>[
+           '_parent' => route('api:v1:products:index')
+       ] ,
+    php artisan route:list --columns=uri,name,method
+    http://shop-app.test/api/v1/products?include=category,range,variants
+-Add the  route to show the product routes/api/v1.php
+  Route::get(
+          '{key}',
+          App\Http\Controllers\Api\V1\Products\IndexController::class
+      )->name('show');
+-in ProductResource add _self to show
+
+ -Test API endpoint
+   http://shop-app.test/api/v1/products?include=category,range
+   http://shop-app.test/api/v1/products?include=category,range,variants
+
+-Add some relationships to CategoryResource and RangeResource
+-Look indexController of Product ,ignore active and replace with )->allowedFilters()->paginate();
+-add filters and test the applications
+-Test the filters
+   http://shop-app.test/api/v1/products?include=category&filters[active]=
+   http://shop-app.test/api/v1/products?filters[active]=true
+   http://shop-app.test/api/v1/products?filters[active]=false
+   http://shop-app.test/api/v1/products?filters[active]=false&filter[vat]=true
+   http://shop-app.test/api/v1/products?filters[active]=true&filter[vat]=true
+   http://shop-app.test/api/v1/products?filters[active]=true&filter[vat]=false
+   http://shop-app.test/api/v1/products?filters[active]=1&filter[vat]=1
+   http://shop-app.test/api/v1/products?filters[active]=1&filter[vat]=0
+   http://shop-app.test/api/v1/products?filters[active]=1&include=variants
+
+-Add the variant relationship
+  http://shop-app.test/api/v1/products?include=variants
 
 
 
-
+READ MORE ABOUT SPATIE BUILDER FILTERS
+  https://spatie.be/docs/laravel-query-builder/v3/features/filtering
 
 EVENT SOURCE VIDEO
 https://www.youtube.com/watch?v=aoaBU__dfDw
