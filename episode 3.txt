@@ -1,0 +1,85 @@
+CARTS AND ORDERS
+ -Create a cart and covert into order
+ -Is very simple ,it holds the object
+ -is the
+CREATE  CART MODEL
+ php artisan make:model Cart  -mf
+
+MOVE THE CART MODEL
+- Move it in  Domains\Customers\Models
+
+ADD ATTRIBUTE IN MIGRATIONS TABLE
+-add all the relevant attribute into Cart Migration table as shown on design
+-we might use event sourcing
+
+MASS ASSIGMENT CART MODELS
+- Add the HasKey traits
+-Add the $fillable attributes
+
+CREATE RELATIONSHIP
+-add some relationship into cart based to user who add the product to the cart
+- add the inverse to the USER model as well
+
+
+CREATE CART FACTORY
+-Add the  faker  in the CartFactory
+-In status attribute ,i am going to use php 8.1 enum
+   https://stitcher.io/blog/php-enums
+   https://github.com/spatie/enum
+   https://spatie.be/docs/enum/v3/installation-and-setup
+   composer require spatie/laravel-enum
+   php artisan vendor:publish --provider="Spatie\Enum\Laravel\EnumServiceProvider" --tag="translation"
+
+-He decided to use  spatie enum package
+   composer require spatie/enum
+   composer update
+-Create States Directory in src/Domains/Customer/States
+-Create Statuses Directory in src/Domains/Customer/States/Statuses
+-Create CartStatus Class within Statuses folder
+- extends: Spatie\Enum\Laravel\Enum
+-Read te documentation  https://github.com/spatie/laravel-enum
+-Add thee enum method
+   /**
+    * @method static self pending()
+    * @method static self complete()
+    * @method static self abandoned()
+
+    */
+-Add the casts protected in cart model
+     protected $casts = [
+            'status' => CartStatus::class,
+        ];
+
+-how to implement the cases
+  php artisan tinker
+   >>> use Domains\Customer\States\Statuses\CartStatus
+   >>> CartStatus::cases()
+   => [
+        Domains\Customer\States\Statuses\CartStatus {#3505},
+        Domains\Customer\States\Statuses\CartStatus {#3509},
+        Domains\Customer\States\Statuses\CartStatus {#3503},
+      ]
+   >>> collect(CartStatus::cases())->each(fn($case) => dump($case))
+  >>> collect(CartStatus::cases())->each(fn($case) => dump($case->value))
+
+   -The above tinker gives  us the arrays results
+   -we can pass to the CartFactor in status attributes
+Add the Cart Factor in the DatabaseSeeder
+-Let us use final in CartStatus class ,can not be extended
+
+
+
+
+Reference
+  https://juststeveking.notion.site/Episode-3-cd2b6e0a6c1449ceac41b18fa8a42f8a
+I'm always in doubt better to control the items per session or directly in the database
+  Based to Steve he likes to put into database ,and work around with business logic
+Can you explain the business logic behind why the total would be kept in the DB?
+  -He is going the event sourcing
+
+
+
+
+
+NG PHP Faker - google
+https://marmelab.com/blog/2020/10/21/sunsetting-faker.html

@@ -58,6 +58,14 @@ class User extends Authenticatable
         );
     }
 
+    public  function  cart()
+    {
+        return $this->hasOne(
+            related: Cart::class,
+            foreignKey: 'user_id'
+        );
+    }
+
     protected static function newFactory() :Factory
     {
         return  UserFactory::new();

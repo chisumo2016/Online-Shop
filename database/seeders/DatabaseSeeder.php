@@ -7,6 +7,7 @@ use Domains\Catalog\Models\Product;
 use Domains\Catalog\Models\Range;
 use Domains\Catalog\Models\Variant;
 use Domains\Customer\Models\Address;
+use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\Location;
 use Illuminate\Database\Seeder;
 
@@ -15,12 +16,12 @@ class DatabaseSeeder extends Seeder
 
     public function run() :void
     {
-        //Location::factory(50)->create();
-        //Address::factory(50)->create();
+        Location::factory(50)->create();
+        Address::factory(50)->create();
         //Category::factory(50)->create();
         //Range::factory(50)->create();
         //Product::factory(50)->create();
         Variant::factory(50)->create();
-
+        Cart::factory(10)->create();
     }
 }
