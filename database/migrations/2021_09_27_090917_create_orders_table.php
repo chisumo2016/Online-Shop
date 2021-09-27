@@ -10,19 +10,23 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-
             $table->string('key')->unique();
 
-            $table->string('status');  // pending , complete, abandoned
+            $table->string('number')->unique();//random number  - SISW -0000 000 000
+            $table->string('state');  //Cancelled/completed/pending/refunded
             $table->string('coupon')->nullable();
 
             $table->unsignedBigInteger('total')->default(0);
             $table->unsignedBigInteger('reduction')->default(0);
 
             $table->foreignId('user_id')->index()->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('shipping_id')->index()->nullable()->constrained('locations')->nullOnDelete();
+            $table->foreignId('billing_id')->index()->nullable()->constrained('locations')->nullOnDelete();
 
+            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('cancelled_at')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
 
     public function down() : void
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('orders');
     }
 };

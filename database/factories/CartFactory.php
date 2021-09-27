@@ -25,7 +25,7 @@ class CartFactory extends Factory
             ),
             'coupon'        =>  $useCoupon ? $this->faker->imei() : null,
             'total'         =>  $this->faker->numberBetween(100, 100000),
-            'reduction'     =>  $useCoupon ? $this->faker->numberBetween(250, 2500) : null,
+            'reduction'     =>  $useCoupon ? $this->faker->numberBetween(250, 2500) : 0,
             'user_id'       =>  User::factory()->create(),
         ];
     }

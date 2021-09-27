@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 
 class Cart extends Model
@@ -34,6 +35,14 @@ class Cart extends Model
        return $this->belongsTo(
            related: User::class,
            foreignKey: 'user_id'
+       );
+   }
+
+   public  function items() : HasMany
+   {
+       return $this->hasMany(
+           related: CartItem::class,
+           foreignKey: 'cart_id'
        );
    }
 

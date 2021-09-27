@@ -67,8 +67,88 @@ CREATE CART FACTORY
 Add the Cart Factor in the DatabaseSeeder
 -Let us use final in CartStatus class ,can not be extended
 
+CREATE  A CARTITEM MODEL $ MIGRATIONS
+-create  model and migration for cartItem
+  ❯ php artisan make:model CartItem  -mf
+-Add some attributes in cartItems migration table
 
 
+MOVE THE CARTITEM MODEL
+-Move CartItem model to the Domains\Customer\Models
+
+ADD MASS ASSIGMENT CARTITEM MODEL
+ -Add the fillable attributes to protect mass assigment
+
+ADD RELATIONSHIP IN CARTITEM MODEL
+-Add the relationship for cart_id in CartItem Model
+-Add the inverse relationship in Cart Model
+-Add morphTo relationship in CartItem model
+  https://laravel.com/docs/8.x/eloquent-relationships#polymorphic-relationships
+-Add also to the AppServiceProvider as doc say Custom Polymorphic Types AT boot() method
+    Relation::enforceMorphMap([
+               'variant' => Variant::class
+           ]);
+       }
+
+-Add relationship to the Variant Model  purchases()
+
+CREATE AN ORDER  AND ORDERLINE
+-We want to convert a cart to an order
+
+CREATE MIGRATIONS , MODEL & FACTORY FOR BOTH
+-Create the migration for Order
+     php artisan make:model Order  -mf
+-Create the migration for OrderLine
+     php artisan make:model OrderLine  -mf
+MOVE THE MODEL INTO DOMAINS
+ -Move the Order to the domain
+   Domains\Customer\Models
+-Move the OrderLine to the Domains
+
+ORDER MIGRATIONS TABLE
+-Add so attributes to the order table
+-we dont have shipping.billing table ,but we're point out to location
+
+ADD MASS ASSIGMENT TO ORDER
+-Add the mass assigment to orders and cast
+
+ADD RELATIONSHIP TOP ORDER MODE
+-Add user() relationship to order model
+-Add an inverse relationship to User Model
+
+CREATE ORDERFACTORY
+-create faker for orderfactory class
+-Add all relevant attribute based on migrations table
+-On state attributes ,please create a file orderStatus.php and pass the value method
+-in state add bothify
+   https://fakerphp.github.io/formatters/numbers-and-strings/#bothify
+CREATE ORDERSTATUS file
+-Create the orderStatus file in src/Domains/Customer/States/Statuses/OrderStatus.php
+-Will be similar to CartStatus
+
+ADD TO DATABASE SEEDER
+-Add a new OrderSeeder in database seeder
+
+CREATE ORDERLINE MIGRATION
+-to take the snapshot of product
+-Add some attribute to OrderLine Table
+
+ADD MASS ASSIGMENT TO ORDERLINE MODEL and CASTS
+ -Add the attribute  related to this model
+-we don't need the casts
+
+ADD THE RELATIONSHIP TO ORDERLINE MODEL
+-add the relationship order() in orderLine Model
+-add the relationship purchasable() () in orderLine Model
+-add the relationship to the Order Model lineitems())
+-add the relationship to the OrderItem Model lineitems())
+-add the relationship to the Variant Model orders()
+
+ORDERLINE FACTORY
+-Create factory for OrderLine  to generate the faker
+
+ADD ORDERLINE FACTORY DATABASE SEEDER
+-add the orderLine factory to the database seeder
 
 Reference
   https://juststeveking.notion.site/Episode-3-cd2b6e0a6c1449ceac41b18fa8a42f8a
