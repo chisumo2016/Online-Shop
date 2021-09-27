@@ -150,6 +150,27 @@ ORDERLINE FACTORY
 ADD ORDERLINE FACTORY DATABASE SEEDER
 -add the orderLine factory to the database seeder
 
+
+CREATE COUPON MIGRATIONS
+-Create a coupon migration and factory
+   php artisan make:model Coupon  -mf
+
+MOVE TO DOMAINS
+-move the coupon tp domains
+    Domains\Customer\Models
+
+ADD MIGRATIONS ATTRIBUTED
+-add attributes to migrations table
+
+ADD MASS ASSIGMENT
+-add the mass assigment to the Coupon  Modl
+-add the $cast as active
+
+CREATE A COUPON FACTORY
+-Add the faker to the CouponFacto
+ADD TO THE DATABASE SEEDER
+-add the CouponFactory to the database seeder
+
 Reference
   https://juststeveking.notion.site/Episode-3-cd2b6e0a6c1449ceac41b18fa8a42f8a
 I'm always in doubt better to control the items per session or directly in the database
