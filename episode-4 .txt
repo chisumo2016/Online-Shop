@@ -38,3 +38,63 @@ START WITH EVENT SOURCING
     Migrated:  2021_09_27_131707_create_snapshots_table (80.33ms)
  php artisan vendor:publish --provider="Spatie\EventSourcing\EventSourcingServiceProvider" --tag="event-sourcing-config"
 
+CREATE AN AGGREGATE FOR APPLICATION
+-create a folder/Directory called Aggregates  src/Domains/Customer/Aggregates
+-Inside Oof it, gonna create CartAggregate Class
+-Extends Spatie\EventSourcing\AggregateRoots\AggregateRoot
+
+WRITING AN AGGREGATE
+https://spatie.be/docs/laravel-event-sourcing/v5/using-aggregates/writing-your-first-aggregate
+-Create an Events Directory in src/Domains/Customer
+    src/Domains/Customer/Events
+-Create the php class file called ProductWasAddedToCart in the EVENTS Directory
+-Extends Spatie\EventSourcing\StoredEvents\ShouldBeStored
+-Within CartAggregate , we need to path two things
+        -product indentifies
+        -cart  indentifies
+       we need to know w/c cart has been added to the product
+
+-declare the constructor  into ProductWasAddedToCart
+-Aggregate is controlling the middle part of event sourcing
+-Aggregate will store an event
+--Fire the events
+-Listerner
+
+PROJECTORS
+-Create a projector directory in the Customer
+        src/Domains/Customer/Projectors
+-Create a CartProjector class
+-Extends Spatie\EventSourcing\EventHandlers\Projectors\Projector
+-Projector will add it
+
+REGISTERING THE PROJECTORS
+-https://spatie.be/docs/laravel-event-sourcing/v5/using-projectors/creating-and-configuring-projectors
+-Create an event provider
+     php artisan make:provider  EventSourcingServiceProvider
+-register the projector into EventSourcingServiceProvider
+
+
+REMOVE PRODUCT FROM CART EVENT SOURCING
+-RemoveProductfromCart
+-add the removeProduct() method in the CartAggregate class
+-create an event file ProductWasRemovedFromCart in Events Folder
+-extends to Spatie\EventSourcing\StoredEvents\ShouldBeStored
+-Within the ProductWasRemovedFromCart class we should pass constructor
+-Record this into CartAggregate
+-create a abstract class in Events folder,are both similar (constructors)
+-create a class called AbstractProductCartEvent/ProductCartEvent
+-Extends Spatie\EventSourcing\StoredEvents\ShouldBeStored
+-Each Event ,should extends to AbstractProductCartEvent
+-move all the constructor into ProductCartEvent
+-Register into Projectors inside the CartProjector file
+ -add onProductWasRemovedFromCart() method and call the Events
+-Projector is listening an event ,like handler
+
+INCREASE QUANTITY  EVENT SOURCING
+-Add the increase into CartAggregate
+
+
+/usr/local/Cellar/php/8.0.0_1/bin/php /Users/os/Documents/projects/shop-app/tests/Feature/CartAggregate.php
+dyld: Library not loaded: /usr/local/opt/openldap/lib/libldap-2.4.2.dylib
+  Referenced from: /usr/local/Cellar/php/8.0.0_1/bin/php
+  Reason: image not found
