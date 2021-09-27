@@ -1,0 +1,28 @@
+EVENT SOURCING  AND EVENT SOURCING LARAVEL
+-https://www.youtube.com/watch?v=xIB_VQVVWKk
+-In this episode we are going to look at the process of adding items to carts,
+    and these creating an order. This will be heavily focused on Event Storming and Event Sourcing.
+  -Event Storming ? - What is happening in the domain of a software program
+     eg https://juststeveking.notion.site/Episode-4-5ba1165263de4e7fb27e0f826a67e5f5
+    - **Product is added to Cart**
+    - **Product Quantity is increased**
+    - **Product Quantity is decreased**
+    - **Product is remove from Cart**
+    - **Coupon is added to Cart**
+    - **Coupon is removed from Cart**
+    - **Coupon fails to be added**
+  -Event Sourcing ?
+DIAGRAM
+https://miro.com/app/board/o9J_lvHnIMs=/
+
+composer update
+
+INSTALL PEST PHP
+-install the package for pest/php
+  composer require pestphp/pest --dev --with-all-dependencies
+  composer require pestphp/pest-plugin-laravel --dev
+  php artisan pest:install
+
+RUN TEST IN  PEST
+ ./vendor/bin/pest
+ php artisan test
