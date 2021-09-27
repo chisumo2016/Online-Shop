@@ -26,3 +26,15 @@ INSTALL PEST PHP
 RUN TEST IN  PEST
  ./vendor/bin/pest
  php artisan test
+
+START WITH EVENT SOURCING
+ https://spatie.be/docs/laravel-event-sourcing/v5/introduction
+ composer require spatie/laravel-event-sourcing
+ php artisan vendor:publish --provider="Spatie\EventSourcing\EventSourcingServiceProvider" --tag="event-sourcing-migrations"
+ php artisan migrate
+    Migrating: 2021_09_27_131706_create_stored_events_table
+    Migrated:  2021_09_27_131706_create_stored_events_table (398.07ms)
+    Migrating: 2021_09_27_131707_create_snapshots_table
+    Migrated:  2021_09_27_131707_create_snapshots_table (80.33ms)
+ php artisan vendor:publish --provider="Spatie\EventSourcing\EventSourcingServiceProvider" --tag="event-sourcing-config"
+
