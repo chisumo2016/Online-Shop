@@ -36,25 +36,25 @@ class CartAggregate extends AggregateRoot
 
        return  $this;
     }
-    public function increaseQuantity(int $cartItemID,     int $quantity, int $cartID): self
+    public function increaseQuantity(int $cartID,int $cartItemID,int $quantity ): self
     {
        $this->recordThat(
            domainEvent: new IncreaseCartQuantity(
-              cartItemID: $cartItemID,
               cartID: $cartID,
-              quantity: $quantity
+               cartItemID: $cartItemID,
+               quantity: $quantity
            ),
 
        );
         return  $this;
     }
-    public function decreaseQuantity(int $cartItemID,     int $quantity, int $cartID): self
+    public function decreaseQuantity(int $cartID,int $cartItemID,     int $quantity): self
     {
         $this->recordThat(
             domainEvent: new DecreaseCartQuantity(
+                cartID: $cartID,
                 cartItemID: $cartItemID,
-                quantity:   $quantity,
-                cartID:     $cartID,
+                quantity: $quantity,
             )
         );
         return  $this;
