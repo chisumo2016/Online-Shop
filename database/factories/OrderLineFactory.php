@@ -22,7 +22,7 @@ class OrderLineFactory extends Factory
             'description'       => $variant->product->description,
             'retail'            => $variant->retail,
             'cost'              => $variant->cost,
-            'quantity'          =>$this->faker->numberBetween(1,7),
+            'quantity'          => $this->faker->numberBetween(1,7),
             'purchasable_id'    => $variant->id,
             'purchasable_type'  =>'variant',
             'order_id'          => Order::factory()->create(),
