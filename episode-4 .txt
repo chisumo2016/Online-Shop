@@ -92,7 +92,7 @@ REMOVE PRODUCT FROM CART EVENT SOURCING
 
 INCREASE QUANTITY  EVENT SOURCING
 -Add the increase into CartAggregate
-
+-Follow the same procedure from above
 
 /usr/local/Cellar/php/8.0.0_1/bin/php /Users/os/Documents/projects/shop-app/tests/Feature/CartAggregate.php
 dyld: Library not loaded: /usr/local/opt/openldap/lib/libldap-2.4.2.dylib

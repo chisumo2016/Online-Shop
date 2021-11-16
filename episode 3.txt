@@ -180,7 +180,5 @@ Can you explain the business logic behind why the total would be kept in the DB?
 
 
 
-
-
 NG PHP Faker - google
 https://marmelab.com/blog/2020/10/21/sunsetting-faker.html

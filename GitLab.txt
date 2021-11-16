@@ -1,0 +1,45 @@
+GIT LAB
+-Installation
+  * https://about.gitlab.com/
+
+SVN (SubVersion) : REMOTE VERSION CONTROL SYSTEM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ITEMS
+ - Age Perfect (L'ORÉAL)            8pcs       @     £ 5.99       47.92
+ -Anti-Ageing   (NIGHT CREAM)       4pcs       @     £ 6.00       26.00
+ -American Dream (COCOA BUTTER)     9pcs       @     £ 6.99       62.91
+ -Dry Itchy Skin                    6pcs       @     £ 5.49       32.94
+ -Cocoa Butter                      2pcs       @     £ 4.49         8.89
+ -Vaseline gel                      30pcs      @     £ 3.65      109.50
+ -Dove MEN + CARE                    6pcs      @     £ 1.80       10.80
+ -Lynx ANTI SWEAT                    1pc       @     £ 1.50        1.50
+ -Lipstick                          12pcs      @     £ 12.50     150.00
+ -Dove Stick(deodorant)               4pc      @    £ 1.79         7.16
+ -Sure (deodorant)                   5pc       @     £ 1.20        6.00
+
+
+
+
+
+
+
+

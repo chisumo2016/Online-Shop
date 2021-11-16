@@ -1,4 +1,14 @@
-02:12 | Git vs Github
+VERSION CONTROL SYSTEMS
+  Why you should be using it ?
+  Git     GitHub
+  GitLab   SVN
+  -Keeps/track Versions of every file/directory
+  -Documents changes with descriptive message
+  -Display differences
+  -Collaboration
+  Example Git
+
+02:12 | Git vs GitHub
     Git
       Is a version control software
       Is used as a command line tool and ran locally
@@ -16,6 +26,10 @@
 
 03:53 | Installing Git
        https://git-scm.com/downloads
+       git config --list
+          git config --global user.name "ddddd"
+          git config --global user.email "ddddd"
+
 04:14 | Init Local Repository
    REMOTE REPOSITORY
    Are hosted on server that is accessible for all team members
@@ -26,8 +40,10 @@
    Reside on te computer of a team member
    Other developers won't see the code in local
    -Code will look different from other
-   -git init
+   -Initialize the git inside directory
+       -git init
    -cd "DCD"
+   Working Directory ---->Staging Area --------->Remote Area
 07:26 | Staging Area & Git Tracking
     git status
     local area
@@ -35,11 +51,12 @@
       git add .
       git status
       git rm --cached test.php
-    commit area
+    commit area /snapshot /document
      git commit -m "..........."
+     git log
      -checking point
-     -add manually and you can come back
-     -Store many information
+     -add manually, and you can come back
+     -Store much information
      -Commit locally in you machine
      -Take those commit to remote
      -Pull all commit into local  repository
@@ -65,7 +82,7 @@
        -Don't modified to master
 
      DEVELOP BRANCH
-       -Is the copy of master branch has different features
+       -Is the copy of master branch has different features'
        git checkout -b develop
        git status
        git add .
@@ -144,3 +161,319 @@ Staging
 Branches
 Remote Repositories
 Commits
+
+
+GIT
+GITHUB
+GITLAB
+SVN
+COLLABORATE WITH OTHER DEVELOPER
+
+REVIEWING CHANGES IN GIT
+-To compare between the two wd and last commit in the repository
+-See the difference btn Staging Area file  and Repository
+-git diff
+
+REMOVING A FILE FROM GIT REPOSITORY
+-remove single file and multiple file
+
+-git rm  <filename>
+-git rm  <filename> <filename>
+-git ls-files
+-remove directory
+   -git rm -r  <directory>
+
+TAGGING (LOCAL PART)
+What is tagging ? creation the point History  of the project
+-used in medium or large
+-To mark the different release
+-How to create a Tag
+-git tag <tag-name>
+example
+   -git tag v1.11
+   -git tag
+   -git tag --list
+   -git tag -l "v1*"
+put descriptive message on Tags
+-git tag -a v2.2 -m "Description Message of this  2.2 tag" stored in git object
+TAG SHOW
+ -git show <tag_name>
+ -git show v2.2
+
+ DELETE TAG
+-git tag -m v1.1.1 -m "Very nice tag"
+-git tag  --delete <tag_name>
+-git tag  --delete v1.1.1
+
+UNSTAGING A STAGING FILE IN GIT
+vi text.txt
+vi text2.txt
+working them quite a bit, complete different on functionality
+-Changes are commit in two separate commit message
+-Add each on staging area ,something not going as  expected
+   git add text.txt  text2.txt
+   git status
+ -Take from the staging area to working directory
+ git restore --staged  <file>
+ git restore --staged text2.txt
+ OR
+ git reset HEAD <FILE>
+ git reset HEAD  text.txt
+ Recommended is staged command
+
+UN-MODIFYING FILES - REVERT LAST COMMIT OPERATION IN GIT
+Example  vim text.txt
+        cat text.txt
+-remove the last commit /to revert the last changes
+-git status
+-git restore <file>
+-git restore text.txt
+
+
+GITHUB
+-its a Git Repositories Hosting Service that has code collaboration' and Version control tools for Repositories management
+-Collaboration
+-Cloud based for our repository
+-Push from locally to Cloud
+
+REMOTE VERSION CONTROL SYSTEM
+-GitLab
+-SourceForge
+-Bitbucket
+-GitHub
+
+GITHUB :COMMANDS AND FUNCTIONALITIES
+
+PUSH TO LOCAL TO REMOTE
+-git remote add origin ""
+-git remote
+-git remove -v
+-git push origin master
+
+SSH
+-will allow you to push from LR to RR
+-Secure shell
+-secure remote connection
+-secure connection
+  -Encryption and Decryption
+-alternative of telnet
+
+SSH PROTOCOL
+  Asymmetric Cryptography Algorithms
+    1 RSA
+    2 dsa
+    GENERATE KEY PAIR -LR
+      1:Public  Key GitHub Server
+      2:Private Key Locally
+
+    SSH KEYGEN TOOLS
+      >ssh-keygen
+      >ssh-keygen --t
+        -generate public and private key
+        -will be saved in .ssh
+             -id_rsa  private
+             -id_rsa.pub
+   SSH-KEYS
+    -Happen after creating  id_rsa and id_rsa.pub in >ssh-keygen
+    CONFIGURATION CONNECTION USING SSH
+    -git remove -v
+    - >ssh-keygen -t rsa -b 4096 -C "EMAIL ADDRESS"
+    >eval  $(ssh-agent -s)
+    >ssh-add .........
+    >clip < ......... .pub
+
+WATCH AND STAR
+-watch button
+-star button
+-will be notified
+-star is bookmark but will not notified
+
+RAW , BLAME and HISTORY OF A FILE ON GITHUB
+-Both are buttons
+
+GITHUB ISSUES AND LABELS
+-Issues is like todo list
+-create new issues button
+-put a title
+-Apply labels to these issues
+-Milestone
+-Assignees someone
+
+.GITIGNORE
+-Plenty of files
+-Not be tracked by git
+EXAMPLE
+  touch .gitignore
+  IGNORE RULES
+    build/
+    *.txt
+
+GITHUB FORK FUNCTIONALITY
+-Example
+  You found the good Laravel from  gitHub repository which doesn't belong to you,
+  You want to have your own copy ON GITHUB account
+-Click FORK
+-Add Files Button
+-Once you have done all the changes or adding features ,You can tell the creator whta you have done by
+-Click Pull request button
+-The author will review some changes
+-Click create pull request
+
+CLONE FROM REMOTE TO LOCAL REPOSITORY
+-Take a project from RR to LR
+-Let use the project we forked
+  -git clone <url>
+  -git push
+  -Go to gitHub after pushed
+  -Click Create pull request button
+
+  BRANCHES
+  -Another version of our code
+  -Will not affect or master branch
+  -One you have finish ,will be reviewed before merged to master
+  -Master used for our production but team working on branches
+
+  PRACTICAL
+  -git status
+  -git diff
+  -git add .
+  -git commit -m "........"
+  git push origin master
+
+  -Create Additional branch
+   -copy from master to develop
+     -git branch "develop"
+        -git status
+     -git  branch  (show all branches)
+     -git checkout develop  (move to another branch)
+         -git status
+         -ls
+         -vim gread.php  (Add new feature)
+         -git add .
+         -git commit -m "........."
+         -git push origin develop
+    -GO TO GITHUB
+      -You will see two branch
+      -But no additional  branch will on master (gread.php file)
+      -Ask someone to check if are collect
+      -Then you can click Compare & pull request
+
+  VERSION CONTROL PREMIUM CONTENT: VISUALIZATION ,FLOW
+ -Strength core git concept
+ -Visualizing material
+
+ GIT LOCAL WORKFLOW DIAGRAM
+ -Five States
+  01:Untracked by git
+    02:Tracked by Git (not changed)
+      03:Tracked by Git (Changed)
+        04:Staged or Index
+          05:Committed (Local Repository)/snapped shot
+
+ NB  There is difference between .git directory and Working Directory
+
+ 01:UNTRACKED FILES/STATE
+ -un documented files with git
+    * git status
+  -WD
+
+02:TRACKING NEW FILES
+    * git add .  (01 -------04)  STAGED
+    * git status
+
+ STAGING MODIFIED FILES
+  -Will tracked by git
+    *git status
+    vim index.php
+    *ls
+    git add .
+
+ TWO STATES AFTER STAGED
+  -modified the files in wd
+        * git status
+  -we can see file on staged area
+  -we want to modify the sec file after we found the bugs
+  -let modified the file in staged area
+        * git status
+
+ COMMITTING THE CHANGES/ SNAPSHOT
+  -In staging area
+    - git commit -m "Some Message"
+
+ SKIPPING THE STAGING AREA
+-How we can skip the SA
+-Staging area /index area
+-To skip staging Area
+    - git commit -a -m "Something"
+-
+
+BRANCHING -FULL INTRODUCTION TO MERGING (Branches in VCS)
+ -Master branch is used for production
+ -Must be approved by manager
+  * git checkout -b develop
+  * git branch develop
+  * git checkout develop
+  * git add *
+  * git commit -m "something"
+-Master branch will be behind of develop branch
+-Assume a customer comes to u and say there is bug in master branch ,reported in the part production
+-Solution is to create a new feature
+-create a new branch in master of bugs fix
+   -git status
+   -git checkout master
+issue branch
+   * git checkout -b issue
+   * git add  file
+   * git commit -m "fixed bug"
+ -Now we have three branches  Master , develop and issue  each of them have some additional commits
+-How can we merge these two branches into master ?
+-We will start merge the issue branch into master
+-We will go to develop branch into master
+
+MERGE - PROCESS .STEPS,AND MERGE TECHNIQUES
+-MERGE FAST FORWARD TECHNIQUE
+-How we can merge everything into master branch
+-Merge make unified history
+example
+/Desktop/Project(issue)
+    * git checkout master
+    * git merge issue
+    NB: Remove the branch
+     git branch -d <name>
+
+RECURSIVE MERGING - 3 WAY MERGE
+-develop branch
+-The changes in issue branch isn't reflect into develop
+/Desktop/Project(master)
+    * git status
+    * git restore <file>
+    * git checkout develop
+    /Desktop/Project(develop)
+    * git add .......
+    * git commit -m "Develop complete"
+
+    Merge into Master
+    * git checkout master
+     /Desktop/Project(master)
+    * git merge develop
+    /Desktop/Project(master)
+    *  git log -1
+    *  git branch -d <name>
+
+
+CONFLICTS RESOLUTIONS
+    MERGE CONFLICT - GENERAL INTRODUCTION
+  MERGE CONFLICT RESOLUTION - CORE PART AND USAGE
+    -START OF MERGING PROCESS
+    -MERGING PROCESS
+    ALWAYS DONE MANUAL
+
+
+
+
+
+
+
+
+
+

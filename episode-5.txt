@@ -1,0 +1,13 @@
+Episode 5
+
+https://juststeveking.notion.site/Episode-5-cde6eb428e554f4fbd27cee2f91ab5c0
+In this episode we are going to take a Test Driven Development approach to how our Cart will work, using pestPHP
+
+
+
+
+
+
+
+
+Ask rafflebird API
