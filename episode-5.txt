@@ -1,10 +1,15 @@
 Episode 5
+In this episode we are going to take a Test Driven Development approach to how our Cart will work,
+  using pestPHP.
+
+Bonus: workbench running.
 https://github.com/JustSteveKing/shop
 https://juststeveking.notion.site/Episode-5-cde6eb428e554f4fbd27cee2f91ab5c0
 In this episode we are going to take a Test Driven Development approach to how our Cart will work, using pestPHP
 https://github.com/brendt/phpstorm-photon-them
 https://github.com/timacdonald/json-api
-https://github.com/JustSteveKing/shop
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
 
 -Create new Feature Cart
    * git checkout -b feature/cart
