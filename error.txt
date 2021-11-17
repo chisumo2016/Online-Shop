@@ -1,0 +1,21 @@
+==> Upgrading mariadb
+  10.4.13 -> 10.6.4
+
+Error: Cannot install mariadb because conflicting formulae are installed.
+  mysql: because mariadb, mysql, and percona install the same binaries
+
+Please `brew unlink mysql` before continuing.
+
+Unlinking removes a formula's symlinks from /usr/local. You can
+link the formula again after the install finishes. You can --force this
+install, but the build may fail or cause obscure side effects in the
+resulting software.
+
+TESTING
+     Expected response status code [201] but received 200.
+     Failed asserting that 201 is identical to 200.
+  Problem : Pass anything into the storeController
+  Soln: Pass functionality into storeController
+
+
+ Failed asserting that 201 is identical to 500.

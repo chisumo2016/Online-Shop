@@ -13,7 +13,7 @@
         "juststeveking/laravel-postcodes": "^1.5",
         "juststeveking/laravel-transporter": "^0.8.0",
         "laravel/framework": "^8.54",
-        "laravel/sanctum": "^2.11",
+        "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
         "spatie/enum": "^3.9",
         "spatie/laravel-enum": "^2.5",
