@@ -68,13 +68,6 @@ nb: Laravel follow PSR 7 / PSR 17
 
 
 
-
-
-
-
-
-
-
 T-KEY -template in php 8 static analysis
   How it works
    1 uri: route('api:v1:carts:products:store', $cart->uuid),
