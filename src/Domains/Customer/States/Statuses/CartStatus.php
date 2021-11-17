@@ -9,4 +9,6 @@ use Spatie\Enum\Laravel\Enum;
  * @method static self complete()
  * @method static self abandoned()
  */
-final class CartStatus extends Enum{}
+final class CartStatus extends Enum
+{
+}

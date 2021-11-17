@@ -10,5 +10,6 @@ abstract class ProductCartEvent extends ShouldBeStored
         public int $purchasableID,
         public int $cartID,
         public string $type,
-    ){}
+    ) {
+    }
 }

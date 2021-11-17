@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Products;
@@ -13,14 +14,13 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ShowController extends Controller
 {
-
-    public function __invoke(Request $request, string $key) : JsonResponse
+    public function __invoke(Request $request, string $key): JsonResponse
     {
         $product = QueryBuilder::for(
             subject: Product::class,
         )->allowedIncludes(
             includes: ['category','range','variants'],
-        )->where('key',$key)->firstOrFail();
+        )->where('key', $key)->firstOrFail();
 
         return response()->json(
             data: new ProductResource(

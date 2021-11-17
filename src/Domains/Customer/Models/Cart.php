@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -36,26 +37,25 @@ class Cart extends Model
         'status' => CartStatus::class . ':nullable',
     ];
 
-   public  function  user() : BelongsTo
-   {
-       return $this->belongsTo(
-           related: User::class,
-           foreignKey: 'user_id'
-       );
-   }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: User::class,
+            foreignKey: 'user_id'
+        );
+    }
 
-   public  function items() : HasMany
-   {
-       return $this->hasMany(
-           related: CartItem::class,
-           foreignKey: 'cart_id'
-       );
-   }
+    public function items(): HasMany
+    {
+        return $this->hasMany(
+            related: CartItem::class,
+            foreignKey: 'cart_id'
+        );
+    }
 
-    protected static function newFactory() :Factory
+    protected static function newFactory(): Factory
     {
         return  CartFactory::new();
-
     }
 
     /**

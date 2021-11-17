@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -30,27 +31,27 @@ class Order extends Model
         'cancelled_at',
     ];
 
-   protected $casts = [
+    protected $casts = [
        'completed_at' => 'datetime',
        'cancelled_at' => 'datetime',
    ];
 
-   public function user() :BelongsTo
-   {
-       return $this->belongsTo(
-           related: User::class,
-           foreignKey: 'user_id'
-       );
-   }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: User::class,
+            foreignKey: 'user_id'
+        );
+    }
 
-   public  function shipping() : BelongsTo
-   {
-       return  $this->belongsTo(
-           related: Location::class,
-           foreignKey: 'shipping_id'
-       );
-   }
-    public  function billing() : BelongsTo
+    public function shipping(): BelongsTo
+    {
+        return  $this->belongsTo(
+            related: Location::class,
+            foreignKey: 'shipping_id'
+        );
+    }
+    public function billing(): BelongsTo
     {
         return  $this->belongsTo(
             related: Location::class,
@@ -58,17 +59,16 @@ class Order extends Model
         );
     }
 
-    public  function lineitems() : HasMany
+    public function lineitems(): HasMany
     {
-       return  $this->hasMany(
-           related: OrderLine::class,
-           foreignKey:  'order_id'
-       );
+        return  $this->hasMany(
+            related: OrderLine::class,
+            foreignKey:  'order_id'
+        );
     }
 
-    protected static function newFactory() :Factory
-        {
-            return  OrderFactory::new();
-
-        }
+    protected static function newFactory(): Factory
+    {
+        return  OrderFactory::new();
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -21,11 +22,11 @@ class Address extends Model
          'location_id',
     ];
 
-   protected  $casts = [
+    protected $casts = [
       'billing'=>'boolean'
    ];
 
-    public  function  user():BelongsTo
+    public function user(): BelongsTo
     {
         return  $this->belongsTo(
             related: User::class,
@@ -33,7 +34,7 @@ class Address extends Model
         );
     }
 
-    public  function  location():BelongsTo
+    public function location(): BelongsTo
     {
         return  $this->belongsTo(
             related: Location::class,
@@ -41,14 +42,14 @@ class Address extends Model
         );
     }
 
-    public  function  sharedBilling(): HasMany
+    public function sharedBilling(): HasMany
     {
         return  $this->HasMany(
             related: User::class,
             foreignKey:'billing_id',
         );
     }
-    protected static function newFactory() :Factory
+    protected static function newFactory(): Factory
     {
         return  AddressFactory::new();
         //return  new AddressFactory();

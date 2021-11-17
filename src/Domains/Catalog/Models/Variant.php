@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Catalog\Models;
@@ -32,28 +33,28 @@ class Variant extends Model
         'product_id',
     ];
 
-   protected $casts = [
+    protected $casts = [
        'active'     => 'boolean',
        'shippable'=> 'boolean',
    ];
 
-   public  function product() :BelongsTo
-   {
+    public function product(): BelongsTo
+    {
         return $this->belongsTo(
             related: Product::class,
             foreignKey: 'product_id'
         );
-   }
+    }
 
-   public  function purchases(): MorphMany
-   {
-      return  $this->morphMany(
-          related: CartStatus::class,
-          name: 'purchasable',
-      );
-   }
+    public function purchases(): MorphMany
+    {
+        return  $this->morphMany(
+            related: CartStatus::class,
+            name: 'purchasable',
+        );
+    }
 
-    public  function orders(): MorphMany
+    public function orders(): MorphMany
     {
         return  $this->morphMany(
             related: OrderLine::class,
@@ -61,9 +62,8 @@ class Variant extends Model
         );
     }
 
-    protected static function newFactory() :Factory
-        {
-            return  VariantFactory::new();
-
-        }
+    protected static function newFactory(): Factory
+    {
+        return  VariantFactory::new();
+    }
 }

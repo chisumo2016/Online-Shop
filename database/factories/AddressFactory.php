@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -11,10 +12,9 @@ use Illuminate\Support\Arr;
 
 class AddressFactory extends Factory
 {
-
     protected $model = Address::class;
 
-    public function definition():array
+    public function definition(): array
     {
         return [
              'label'=>Arr::random([
@@ -30,18 +30,18 @@ class AddressFactory extends Factory
         ];
     }
 
-    public  function billing() : Factory
+    public function billing(): Factory
     {
-       return $this->state(function (array $attributes){
-           return [
+        return $this->state(function (array $attributes) {
+            return [
                'billing' => true
            ];
-       });
+        });
     }
 
-    public  function shipping() : Factory
+    public function shipping(): Factory
     {
-        return $this->state(function (array $attributes){
+        return $this->state(function (array $attributes) {
             return [
                 'billing' => false,
             ];

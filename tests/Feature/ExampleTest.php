@@ -1,15 +1,14 @@
 <?php
+
  declare(strict_types=1);
 
 use JustSteveKing\StatusCode\Http;
 use function Pest\Laravel\get;
 
-it('receives a HTTP Ok on the home page' ,function () {
+it('receives a HTTP Ok on the home page', function () {
     get(
         uri: route('home'),
-    )->assertStatus(status: Http::OK
+    )->assertStatus(
+        status: Http::OK
     );
 });
-
-
-

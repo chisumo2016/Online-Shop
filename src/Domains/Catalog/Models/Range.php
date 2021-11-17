@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Catalog\Models;
@@ -19,7 +20,7 @@ class Range extends Model
     use HasKey;
     use HasFactory;
 
-    public  $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable =[
         'key',
@@ -32,7 +33,7 @@ class Range extends Model
         'active'=> 'boolean'
     ];
 
-    public  function products():HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(
             related: Product::class,
@@ -40,13 +41,13 @@ class Range extends Model
         );
     }
 
-    public  function  newEloquentBuilder($query) :Builder
+    public function newEloquentBuilder($query): Builder
     {
         return new RangeBuilder(
             query: $query
         );
     }
-    protected static function newFactory() :Factory
+    protected static function newFactory(): Factory
     {
         return  RangeFactory::new();
         //return  new AddressFactory();

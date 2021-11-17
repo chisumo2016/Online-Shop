@@ -8,8 +8,7 @@ use Spatie\EventSourcing\Facades\Projectionist;
 
 class EventSourcingServiceProvider extends ServiceProvider
 {
-
-    public function register() : void
+    public function register(): void
     {
         // adding a single projector
         Projectionist::addProjectors(
@@ -20,7 +19,7 @@ class EventSourcingServiceProvider extends ServiceProvider
     }
 
 
-    public function boot() : void
+    public function boot(): void
     {
         //
     }

@@ -1,4 +1,5 @@
 <?php
+
  declare(strict_types=1);
 namespace Domains\Customer\Models;
 
@@ -35,7 +36,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public  function  addresses() : HasMany
+    public function addresses(): HasMany
     {
         return  $this->hasMany(
             related: Address::class,
@@ -43,14 +44,14 @@ class User extends Authenticatable
         );
     }
 
-    public function billing() :BelongsTo
+    public function billing(): BelongsTo
     {
         return  $this->BelongsTo(
             related: Address::class,
             foreignKey: 'billing_id',
         );
     }
-    public function shipping() :BelongsTo
+    public function shipping(): BelongsTo
     {
         return  $this->BelongsTo(
             related: Address::class,
@@ -58,7 +59,7 @@ class User extends Authenticatable
         );
     }
 
-    public  function  cart()
+    public function cart()
     {
         return $this->hasOne(
             related: Cart::class,
@@ -66,7 +67,7 @@ class User extends Authenticatable
         );
     }
 
-    public  function orders()  : HasMany
+    public function orders(): HasMany
     {
         return $this->HasMany(
             related: Order::class,
@@ -74,10 +75,9 @@ class User extends Authenticatable
         );
     }
 
-    protected static function newFactory() :Factory
+    protected static function newFactory(): Factory
     {
         return  UserFactory::new();
         //return  new UserFactory();
     }
-
 }

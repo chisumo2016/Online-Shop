@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 namespace Database\Factories;
 
@@ -7,10 +8,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use JustSteveKing\LaravelPostcodes\Service\PostcodeService;
 
-
 class LocationFactory extends Factory
 {
-
     protected $model = Location::class;
 
     public function definition(): array

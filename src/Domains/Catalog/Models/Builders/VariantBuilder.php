@@ -9,17 +9,17 @@ class VariantBuilder extends Builder
 {
     use HasActiveScope;
 
-    public  function physical() : self
+    public function physical(): self
     {
         return $this->where('shippable', true);
     }
 
-    public  function  digital() : self
+    public function digital(): self
     {
         return $this->where('shippable', false);
     }
 
-    public  function downloadable() : self
+    public function downloadable(): self
     {
         return  $this->digital();
     }

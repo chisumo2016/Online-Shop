@@ -3,7 +3,7 @@
 use Domains\Customer\Factories\CartFactory;
 use Domains\Customer\ValueObjects\CartValueObject;
 
-it('can create a cart value object', function (){
+it('can create a cart value object', function () {
     expect(
         CartFactory::make(
             attributes: [

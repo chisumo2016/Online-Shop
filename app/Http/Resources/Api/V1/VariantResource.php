@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Resources\Api\V1;
@@ -13,7 +14,7 @@ class VariantResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request) : array
+    public function toArray($request): array
     {
         return parent::toArray($request);
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -13,10 +14,9 @@ use Illuminate\Support\Str;
 
 class OrderFactory extends Factory
 {
-
     protected $model = Order::class;
 
-    public function definition():array
+    public function definition(): array
     {
         $useCoupon = $this->faker->boolean();
         $state = Arr::random(OrderStatus::toLabels());

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -27,13 +28,13 @@ class Location extends Model
     ];
 
 
-    protected static function newFactory() :Factory
+    protected static function newFactory(): Factory
     {
         return  LocationFactory::new();
         //return  new LocationFactory();
     }
 
-    public  function  addresses() : HasMany
+    public function addresses(): HasMany
     {
         return  $this->hasMany(
             related: Address::class,

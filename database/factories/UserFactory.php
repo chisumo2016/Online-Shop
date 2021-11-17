@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -10,11 +11,10 @@ use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-
     protected $model = User::class;
 
 
-    public function definition() : array
+    public function definition(): array
     {
         return [
             'first_name' => $this->faker->firstName,
@@ -24,5 +24,4 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
         ];
     }
-
 }

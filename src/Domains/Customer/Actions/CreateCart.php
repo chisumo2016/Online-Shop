@@ -1,5 +1,6 @@
 <?php
-declare(strict_types =1);
+
+declare(strict_types=1);
 
 namespace Domains\Customer\Actions;
 
@@ -9,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CreateCart
 {
-    public  static  function handle(CartValueObject $cart): Model
+    public static function handle(CartValueObject $cart): Model
     {
-       return  Cart::query()->create($cart->toArray());
+        return  Cart::query()->create($cart->toArray());
     }
 }

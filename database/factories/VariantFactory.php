@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -9,10 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VariantFactory extends Factory
 {
-
     protected $model = Variant::class;
 
-    public function definition():array
+    public function definition(): array
     {
         $product = Product::factory()->create();
         $cost    = $this->faker->boolean ? $product->cost : ($product->cost + $this->faker->numberBetween(100, 7500));

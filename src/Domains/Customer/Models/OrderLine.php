@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -29,23 +30,22 @@ class OrderLine extends Model
 
     ];
 
-   protected $casts = [];
+    protected $casts = [];
 
-   public function order() : BelongsTo
-   {
-       $this->belongsTo(
-           related: Order::class,
-           foreignKey: 'order_id'
-       );
-   }
-    public  function purchasable() : MorphTo
+    public function order(): BelongsTo
+    {
+        $this->belongsTo(
+            related: Order::class,
+            foreignKey: 'order_id'
+        );
+    }
+    public function purchasable(): MorphTo
     {
         return  $this->morphTo(); //AppService
     }
 
-    protected static function newFactory() :Factory
-        {
-            return  OrderLineFactory::new();
-
-        }
+    protected static function newFactory(): Factory
+    {
+        return  OrderLineFactory::new();
+    }
 }

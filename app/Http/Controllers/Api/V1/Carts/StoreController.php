@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Carts;
@@ -13,7 +14,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use JustSteveKing\StatusCode\Http;
 
-
 class StoreController extends Controller
 {
     /**
@@ -21,22 +21,22 @@ class StoreController extends Controller
      * @return JsonResponse
      */
 
-    public function __invoke(Request $request):JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
-       //create a car
+        //create a car
 
         $cart = CreateCart::handle(
             cart:CartFactory::make(
-                 attributes: [
+                attributes: [
                      'status' => CartStatus::pending()->value,
                      'user_id' => auth()->id() ?? null  //'user_id'=> auth()->id()
                  ]
-                ),
+            ),
         );
         return new JsonResponse(
             data: new CartResource(
                 resource: $cart
-                  ),
+            ),
             status: Http::CREATED
         );
     }

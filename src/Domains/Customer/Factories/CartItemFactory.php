@@ -1,5 +1,6 @@
 <?php
-declare(strict_types =1);
+
+declare(strict_types=1);
 
 namespace Domains\Customer\Factories;
 
@@ -7,7 +8,7 @@ use Domains\Customer\ValueObjects\CartItemValueObject;
 
 class CartItemFactory
 {
-    public  static function make(array $attributes) : CartItemValueObject
+    public static function make(array $attributes): CartItemValueObject
     {
         return new CartItemValueObject(
             quantity:           $attributes['quantity'],

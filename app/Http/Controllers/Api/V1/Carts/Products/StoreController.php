@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Carts\Products;
@@ -15,18 +16,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use JustSteveKing\StatusCode\Http;
 
-
 class StoreController extends Controller
 {
-
     public function __invoke(ProductRequest $request, Cart $cart): Response
     {
-         CartAggregate::retrieve(
+        CartAggregate::retrieve(
             uuid:  $cart->uuid,
         )->addProduct(
             purchasableID: $request->get('purchasable_id'),
-             cartID:       $cart->id,
-             type:         $request->get('purchasable_type')
+            cartID:       $cart->id,
+            type:         $request->get('purchasable_type')
         )->persist();
 
         return new Response(

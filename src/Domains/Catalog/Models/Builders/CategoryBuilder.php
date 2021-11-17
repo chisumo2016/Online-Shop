@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CategoryBuilder extends Builder
 {
-   use HasActiveScope;
+    use HasActiveScope;
 }

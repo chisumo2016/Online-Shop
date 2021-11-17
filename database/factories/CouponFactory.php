@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -8,12 +9,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CouponFactory extends Factory
 {
-
     protected $model = Coupon::class;
 
-    public function definition():array
+    public function definition(): array
     {
-        $max = $this->faker->numberBetween(10,1000);
+        $max = $this->faker->numberBetween(10, 1000);
         return [
             'code'          =>  $this->faker->bothify(string: 'COUP-????-????'),
             'reduction'     =>  $this->faker->numberBetween(100, 5000),

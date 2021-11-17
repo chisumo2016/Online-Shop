@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -26,25 +27,24 @@ class CartItem extends Model
        'cart_id',
     ];
 
-   protected $casts = [];
+    protected $casts = [];
 
-   public  function cart() :BelongsTo
-   {
-       return  $this->belongsTo(
-           related: Cart::class,
-           foreignKey: 'cart_id'
-       );
-   }
+    public function cart(): BelongsTo
+    {
+        return  $this->belongsTo(
+            related: Cart::class,
+            foreignKey: 'cart_id'
+        );
+    }
 
-   public  function purchasable() : MorphTo
-   {
-       return  $this->morphTo(); //AppService
-   }
+    public function purchasable(): MorphTo
+    {
+        return  $this->morphTo(); //AppService
+    }
 
 
-    protected static function newFactory() :Factory
-        {
-            return  CartItemFactory::new();
-
-        }
+    protected static function newFactory(): Factory
+    {
+        return  CartItemFactory::new();
+    }
 }

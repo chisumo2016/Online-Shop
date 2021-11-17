@@ -1,5 +1,6 @@
 <?php
-declare(strict_types =1);
+
+declare(strict_types=1);
 
 namespace Domains\Customer\ValueObjects;
 
@@ -15,18 +16,18 @@ class CartItemValueObject
      * @param string $purchasableType
      */
 
-    public  function __construct(
-        public int      $quantity,
-        public int      $purchasableId,
-        public string   $purchasableType,
-
-    ){}
+    public function __construct(
+        public int $quantity,
+        public int $purchasableId,
+        public string $purchasableType,
+    ) {
+    }
 
 
     /**
      * @return array<string,TValue>
      */
-    public  function  toArray(): array
+    public function toArray(): array
     {
         return [
             'quantity'          =>  $this->quantity,

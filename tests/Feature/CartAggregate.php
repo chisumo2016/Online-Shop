@@ -1,5 +1,6 @@
 <?php
-  declare(strict_types = 1);
+
+  declare(strict_types=1);
 
 
 use Domains\Catalog\Models\Variant;
@@ -7,11 +8,11 @@ use Domains\Customer\Aggregates\CartAggregate;
 use Domains\Customer\Events\ProductWasAddedToCart;
 use Domains\Customer\Models\Cart;
 
-it('can store an event for adding a product', function (){
-      $product = Variant::factory()->create();
-      $cart    = Cart::factory()->create();
+it('can store an event for adding a product', function () {
+    $product = Variant::factory()->create();
+    $cart    = Cart::factory()->create();
 
-       CartAggregate::fake()
+    CartAggregate::fake()
            ->given(
                events: [
                    new ProductWasAddedToCart(
@@ -21,18 +22,18 @@ it('can store an event for adding a product', function (){
                    )
                ]
            )->when(
-               callable: function (CartAggregate $aggregate) use ($product,$cart) : void {
+               callable: function (CartAggregate $aggregate) use ($product, $cart): void {
                    $aggregate->addProduct(
                        purchasableID: $product->id,
                        cartID: $cart->id,
                        type: Cart::class,
                    );
-        },
-    )->assertEventRecorded(expectedEvent: new ProductWasAddedToCart(
-               purchasableID: $product->id,
-               cartID: $cart->id,
-               type: Cart::class
-
-            )
-           );
-  });
+               },
+           )->assertEventRecorded(
+        expectedEvent: new ProductWasAddedToCart(
+        purchasableID: $product->id,
+        cartID: $cart->id,
+        type: Cart::class
+    )
+    );
+});

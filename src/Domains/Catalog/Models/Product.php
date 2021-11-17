@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Catalog\Models;
@@ -30,12 +31,12 @@ class Product extends Model
         'range_id',
     ];
 
-    protected  $casts = [
+    protected $casts = [
         'active' => 'boolean',
         'vat' => 'boolean'
     ];
 
-    public  function category()  :BelongsTo
+    public function category(): BelongsTo
     {
         return  $this->belongsTo(
             related: Category::class,
@@ -44,7 +45,7 @@ class Product extends Model
     }
 
 
-    public  function range()  :BelongsTo
+    public function range(): BelongsTo
     {
         return $this->BelongsTo(
             related: Range::class,
@@ -52,7 +53,7 @@ class Product extends Model
         );
     }
 
-    public  function variants() :HasMany
+    public function variants(): HasMany
     {
         return $this->hasMany(
             related: Variant::class,
@@ -60,17 +61,16 @@ class Product extends Model
         );
     }
 
-    public  function  newEloquentBuilder($query) :Builder
+    public function newEloquentBuilder($query): Builder
     {
         return new ProductBuilder(
             query: $query
         );
     }
 
-    protected static function newFactory() :Factory
+    protected static function newFactory(): Factory
     {
         return  ProductFactory::new();
         //return  new AddressFactory();
     }
-
 }

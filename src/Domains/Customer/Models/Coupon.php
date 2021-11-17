@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Customer\Models;
@@ -23,13 +24,12 @@ class Coupon extends Model
         'active',
     ];
 
-   protected $casts = [
+    protected $casts = [
        'active' => 'boolean'
    ];
 
-    protected static function newFactory() :Factory
-        {
-            return  CouponFactory::new();
-
-        }
+    protected static function newFactory(): Factory
+    {
+        return  CouponFactory::new();
+    }
 }

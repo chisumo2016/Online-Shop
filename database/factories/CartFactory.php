@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
-
 
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\User;
@@ -12,10 +12,9 @@ use Illuminate\Support\Arr;
 
 class CartFactory extends Factory
 {
-
     protected $model = Cart::class;
 
-    public function definition():array
+    public function definition(): array
     {
         $useCoupon = $this->faker->boolean();
         return [

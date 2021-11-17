@@ -15,34 +15,35 @@ use function Pest\Laravel\post;
 use function Pest\Laravel\get;
 
 /*Create a cart*/
-it('creates a cart for an unauthenticated user',function (){
+it('creates a cart for an unauthenticated user', function () {
     post(
-         uri: route('api:v1:carts:store'),
-     )->assertStatus(
+        uri: route('api:v1:carts:store'),
+    )->assertStatus(
          status: Http::CREATED
-     )->assertJson(fn (AssertableJson $json) =>
+     )->assertJson(
+         fn (AssertableJson $json) =>
          //dd($json);
         $json->where('type', 'cart')
             ->where('attributes.status', CartStatus::pending()->label)
             ->etc()
-        );
+     );
     //->assertJsonPath(path: 'data.type', expect: 'cart')
 });
 
 /*do we have an active cart*/
-it('returns a cart for a logged in user', function (){
+it('returns a cart for a logged in user', function () {
     $cart = Cart::factory()->create();
 
     auth()->loginUsingId($cart->user_id);
 
-   get(
+    get(
         uri: route('api:v1:carts:index'),
     )->assertStatus(
         status: Http::OK
     );
 });
 
-it('returns a no content status when a guest tries to retrieve their carts', function (){
+it('returns a no content status when a guest tries to retrieve their carts', function () {
     get(
         uri: route('api:v1:carts:index'),
     )->assertStatus(
@@ -51,7 +52,7 @@ it('returns a no content status when a guest tries to retrieve their carts', fun
 });
 
 /*add products to a cart*/
-it('can add a new product to a cart', function (){
+it('can add a new product to a cart', function () {
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
 
     $cart       = Cart::factory()->create();

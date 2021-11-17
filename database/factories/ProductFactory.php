@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -10,10 +11,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
 {
-
     protected $model = Product::class;
 
-    public function definition():array
+    public function definition(): array
     {
         $cost = $this->faker->numberBetween(100, 100000);
         return [
