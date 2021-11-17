@@ -1,0 +1,22 @@
+RESOURCES
+Bonus: workbench running.
+https://github.com/JustSteveKing/shop
+https://juststeveking.notion.site/Episode-6-3d413656323548aebc6c02b6a95e549c
+https://github.com/brendt/phpstorm-photon-them
+https://github.com/timacdonald/json-api
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
+https://pestphp.com/
+
+Episode 5
+In this episode we are going to carry on using TDD and event sourcing to finish off our cart functionality.
+ -TDD
+ -Event sourcing
+ Steps
+ -Switched to branch 'feature/cart
+     git checkout feature/cart
+ -Run test
+   - ./vendor/bin/pest
+ -Composer update
+    -composer update
+
