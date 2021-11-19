@@ -1,0 +1,17 @@
+RESOURCES
+Bonus: workbench running.
+https://github.com/JustSteveKing/shop
+https://juststeveking.notion.site/Episode-6-3d413656323548aebc6c02b6a95e549c
+https://github.com/brendt/phpstorm-photon-them
+https://github.com/timacdonald/json-api
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
+https://pestphp.com/
+https://meetup.laravel.com/events
+https://www.youtube.com/watch?v=2UyDBArGLDY
+
+Episode 7
+  -Removing a Coupon
+  -Adding Shipping Info
+  -Adding Billing Info
+  -Maybe Payments

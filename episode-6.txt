@@ -129,6 +129,123 @@ code removed after introducing the aggregate UpdateController
 
 22:Passed the test
 
+NEW FEATURE - COUPON TO OUR CART
+
+1 -Add a coupon to our cart - API route:
+    Route::post('{cart:uuid}/coupons', App\Http\Controllers\Api\V1\Carts\coupons\StoreController::class)->name('coupons:store');
+2:Create a Controller
+   php artisan make:controller Api\\V1\\Carts\\Coupons\\StoreController --invokable
+3:Write a test in cartTest
+    `can apply a coupon to the cart`
+4: run route
+     php artisan route:list --columns=uri,name,method
+5:write the logic in the test
+6:Run the Test
+   ./vendor/bin/pest
+7: Failed the Test
+     • Tests\Feature\CartTest > it can apply a coupon to the cart
+       Illuminate\Routing\Exceptions\UrlGenerationException
+
+      Missing required parameter for [Route: api:v1:carts:coupons:store] [URI: api/v1/carts/{cart}/coupons] [Missing parameter: cart].
+8: Problem ,missing the parameter
+9:Pass the parameter into StoreController
+10:Run the Test
+      ./vendor/bin/pest
+11: Failed the Test
+    • Tests\Feature\CartTest > it can apply a coupon to the cart
+      Illuminate\Routing\Exceptions\UrlGenerationException
+
+     Missing required parameter for [Route: api:v1:carts:coupons:store] [URI: api/v1/carts/{cart}/coupons] [Missing parameter: cart].
+12: Solution ,add parameter inside the route('' ,[]) - test itsself
+     uri: route('api:v1:carts:coupons:store',$cart->uuid),
+13:Run the Test
+        ./vendor/bin/pest
+14: Failed the Test
+    • Tests\Feature\CartTest > it can apply a coupon to the cart
+      Expected response status code [202] but received 405.
+      Failed asserting that 202 is identical to 405.
+
+15 :Let change our CartFactory
+    //$useCoupon ? $this->faker->imei() : null,
+    'coupon'        =>  null,
+    //$useCoupon ? $this->faker->numberBetween(250, 2500) : 0,
+    'reduction'     =>  0,
+16:Pass expect() in the test
+17:Run the Test
+    ./vendor/bin/pest
+18: Failed the Test
+      • Tests\Feature\CartTest > it can apply a coupon to the cart
+      Expected response status code [202] but received 405.
+      Failed asserting that 202 is identical to 405.
+19: Solution is to create coupon request
+    php artisan make:request  Api\\V1\\Carts\\Coupons\\StoreRequest
+20:Write the validation rule inside store request
+21:Run the Test
+       ./vendor/bin/pest
+22: Failed the Test
+          • Tests\Feature\CartTest > it can apply a coupon to the cart
+          Expected response status code [202] but received 405.
+          Failed asserting that 202 is identical to 405.
+23:Write logic into store controller
+
+24:Run the Test
+       ./vendor/bin/pest
+25:Passed the Test
+26:Implement the EventSource in the CartTest
+
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
+
+      replace
+      expect(
+              Cart::query()->find($cart->id)
+          )->reduction->toEqual($coupon->reduction)->coupon->toEqual($coupon->code);
+
+      To
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
+    expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
+
+27:Run the Test
+          ./vendor/bin/pest
+28: Test fail after adding the EloquentEvent Source
+     • Tests\Feature\CartTest > it can apply a coupon to the cart
+      Failed asserting that actual size 0 matches expected size 1.
+29: Solution is to write another function inside the CartAggregate
+      -name of function ApplyCoupon
+      -Create an events  called CouponWasApplied and extends to spatie library shouldBeStored
+      -Inside the src/Domains/Customer/Events/CouponWasApplied.php
+         -write a constructor
+30:Back to ApplyCoupon aggregate  and import the  CouponWasApplied
+31:To write new function inside the  Projector
+    -call onCouponWasApplied
+    -write the logic
+32:Run the Test
+      ./vendor/bin/pest
+33:Test fail
+  • Tests\Feature\CartTest > it can apply a coupon to the cart
+   Failed asserting that actual size 0 matches expected size 1.
+34:Solution
+    instead of update , we're going to use CartAggregate
+       $cart->update([
+          'coupon'       => $coupon->code,
+           'reduction'   => $coupon->reduction
+       ]);
+
+34::Run the Test
+      ./vendor/bin/pest
+35:Test fail
+     • Tests\Feature\CartTest > it can apply a coupon to the cart
+     Failed asserting that two strings are equal.
+
+36:Problem was in the test
+     CouponWasApplied in the eloquentEvent Source
+       expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(CouponWasApplied::class);
+37:Run the Test
+      ./vendor/bin/pest
+38:Passed the Test
+
+
+
+
 
 
 

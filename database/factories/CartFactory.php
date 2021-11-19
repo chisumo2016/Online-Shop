@@ -22,9 +22,9 @@ class CartFactory extends Factory
                              //array: collect(CartStatus::toLabels())->random()
                              array: CartStatus::toLabels(),
             ),
-            'coupon'        =>  $useCoupon ? $this->faker->imei() : null,
+            'coupon'        =>  null,//$useCoupon ? $this->faker->imei() : null,
             'total'         =>  $this->faker->numberBetween(100, 100000),
-            'reduction'     =>  $useCoupon ? $this->faker->numberBetween(250, 2500) : 0,
+            'reduction'     =>  0,//$useCoupon ? $this->faker->numberBetween(250, 2500) : 0,
             'user_id'       =>  User::factory()->create(),
         ];
     }
