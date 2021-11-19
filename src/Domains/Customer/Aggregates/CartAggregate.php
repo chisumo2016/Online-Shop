@@ -17,10 +17,10 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             new ProductWasAddedToCart(
-            purchasableID: $purchasableID,
-            cartID:     $cartID,
-            type: $type
-        ),
+                purchasableID: $purchasableID,
+                cartID:     $cartID,
+                type: $type
+            ),
         );
         return $this;
     }
@@ -29,10 +29,10 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             domainEvent: new ProductWasRemovedFromCart(
-               purchasableID: $purchasableID,
-               cartID:     $cartID,
-               type: $type
-           ),
+                purchasableID:   $purchasableID,
+                cartID:           $cartID,
+                type:             $type
+            ),
         );
 
         return  $this;
@@ -41,10 +41,10 @@ class CartAggregate extends AggregateRoot
     {
         $this->recordThat(
             domainEvent: new IncreaseCartQuantity(
-               cartID: $cartID,
-               cartItemID: $cartItemID,
-               quantity: $quantity
-           ),
+                cartID: $cartID,
+                cartItemID: $cartItemID,
+                quantity: $quantity
+            ),
         );
         return  $this;
     }

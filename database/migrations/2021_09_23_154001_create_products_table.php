@@ -14,7 +14,7 @@ return new class() extends Migration {
             $table->id();
             $table->string('key')->unique();
 
-            //informotions
+            //information
             $table->string('name');
             $table->mediumText('description');
             $table->unsignedInteger('cost');
@@ -28,8 +28,10 @@ return new class() extends Migration {
             $table->boolean('vat')->default(config('sho.vat'));
 
             //relationships
-            $table->foreignId('category_id')->nullable()->index()->constrained('categories')->nullOnDelete();
-            $table->foreignId('range_id')->nullable()->index()->constrained('categories')->nullOnDelete();
+            //$table->foreignId('category_id')->nullable()->index()->constrained('categories')->nullOnDelete();
+            //$table->foreignId('range_id')->nullable()->index()->constrained('categories')->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->index()->constrained()->nullOnDelete();
+            $table->foreignId('range_id')->nullable()->index()->constrained()->nullOnDelete();
 
             //Date stamps
             $table->timestamps();

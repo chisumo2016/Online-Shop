@@ -20,8 +20,9 @@ class CartProjector extends Projector
             id: $event->cartID,
         );
         $cart->items()->create([
-          'purchasable_id' => $event->purchasableID,
-          'purchasable_type' => $event->type,
+            'quantity'          => 1,
+          'purchasable_id'      => $event->purchasableID,
+          'purchasable_type'    => $event->type,
       ]);
     }
 

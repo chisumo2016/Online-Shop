@@ -7,6 +7,8 @@ https://github.com/timacdonald/json-api
 https://laravelshift.com/phpunit-to-pest-converter
 https://laravelshift.com/workbench
 https://pestphp.com/
+https://meetup.laravel.com/events
+https://www.youtube.com/watch?v=2UyDBArGLDY
 
 Episode 5
 In this episode we are going to carry on using TDD and event sourcing to finish off our cart functionality.
@@ -19,4 +21,143 @@ In this episode we are going to carry on using TDD and event sourcing to finish 
    - ./vendor/bin/pest
  -Composer update
     -composer update
+-Update the cart (TDD)
+    -Write a test 1s from CartTest to update the cart
+    -Uncomment the web route api
+    -Create the UpdateController
+       php artisan make:controller Api\\V1\\Carts\\Products\\UpdateController --invokable
+  -Add logic into UpdateController
+  -Add the validation
+    php artisan make:request  Api\\V1\\Carts\\Products\\UpdateRequest
+ -we cn decrease the cart item(write a test)
+ -In summary we can add ,increase ,decrease and remove the cart
 
+ TIME TO REFACTOR OUR CODE
+   Pseudocode in updateController
+        -Create cart aggregate
+        -if quantity is 0 trigger the remove product event
+         -otherwise trigger the change quantity event
+
+
+code removed after introducing the aggregate UpdateController
+
+            //if quantity equal 0 remove cart item
+        if ($request->get('quantity') === 0) {
+             //remove item
+            $item->delete();
+        }else{
+            //update cart item quantity
+            $item->update([
+                //'quantity' => ($item->quantity + $request->get('quantity')),
+                 'quantity' => $request->get('quantity'),
+               ]);
+        }
+
+-The test will fail
+   Failed asserting that a row in the table [cart_items] does not match the attributes {
+       "id": 2
+   }.
+
+-we need to move our logic into action ,our controller must be cleaned
+-we're going to put into Actions folder
+   * src/Domains/Customer/Actions/ChangeCartQuantity.php
+-Add another Action RemoveProductFromCart
+    src/Domains/Customer/Actions/RemoveProductFromCart.php
+
+    STEPS
+1-write a test to delete the cart `can remove an item from the cart`
+2-Create a DeleteController
+    php artisan make:controller Api\\V1\\Carts\\Products\\DeleteController --invokable
+3-Uncomment the API route for delete in api route:
+       Route::delete('{cart:uuid}/products/{Item:uuid}', App\Http\Controllers\Api\V1\Carts\products\DeleteController::class)->name('products:delete')
+4-Run the test
+  * ./vendor/bin/pest
+    Expected response status code [202] but received 200.
+    Failed asserting that 202 is identical to 200.
+    To remove this error , you need to write a functionality on DeleteController to remove the error
+5-Open DeleteController and functionality
+6- Run the test again
+     ./vendor/bin/pest
+7-Another error appeared again
+    Expected response status code [202] but received 500.
+   The following exception occurred during the request:
+   TypeError: App\Http\Controllers\Api\V1\Carts\Products\DeleteController::__invoke(): Return value must be of type Illuminate\Http\Response
+8:Solution
+    Remove the :Response
+9:Run again the test
+    ./vendor/bin/pest
+10.Another error appeared
+     Expected response status code [202] but received 200.
+     Failed asserting that 202 is identical to 200.
+11:Write the functionality inside the controller  delete
+     $item->delete();
+         return new Response(
+             content: null,
+             status: Http::ACCEPTED
+         );
+12:9:Run again the test
+       ./vendor/bin/pest
+13:Passed the Test
+
+14 :Go back to the test and add the assertDelete()
+      assertDeleted($item);
+15:Run again the test
+       ./vendor/bin/pest
+16:Passed the Test
+
+17:Refactor to use the event sourcing , add the ElquentEvent in the test
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
+
+    //assertDeleted($item);
+        expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
+        expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
+
+18:Run again the test
+       ./vendor/bin/pest
+19:Fail the Test after adding the  EloquentStoredEvent
+     • Tests\Feature\CartTest > it can remove an item from the cart
+      Failed asserting that actual size 0 matches expected size 1.
+20:Solution
+  We need to call the Actions RemoveProductionFromCart inside the DeleteController and remove delete()
+       RemoveProductFromCart::handle(
+                 cart: $cart,
+                 item:$item
+             );
+             -calling the aggregate , removing  the product
+21:Run again the test
+       ./vendor/bin/pest
+
+22:Passed the test
+
+
+
+
+
+switch ($quantity){ //$quantity = $request->get('quantity')
+            case 0;
+                $aggregate->removeProduct(
+                    purchasableID: $item->id,
+                    cartID:        $cart->id,
+                    type:          get_class($item)
+                )->persist();
+
+                break;
+
+            case ($quantity > $item->quantity);
+                $aggregate->increaseQuantity(
+                    cartID:     $cart->id,
+                    cartItemID: $item->id,
+                    quantity:   $quantity,
+                )->persist();
+
+                break;
+
+            case ($quantity < $item->quantity );
+                $aggregate->decreaseQuantity(
+                    cartID:     $cart->id,
+                    cartItemID: $item->id,
+                    quantity:   $quantity,
+                )->persist();
+
+                break;
+        }
