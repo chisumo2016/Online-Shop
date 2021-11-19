@@ -40,8 +40,8 @@ it('creates a cart for an unauthenticated user', function () {
 });
 
 /*do we have an active cart*/
-it('returns a cart for a logged in user', function () {
-    $cart = Cart::factory()->create();
+it('returns a cart for a logged in user', function (Cart $cart) {
+    //$cart = Cart::factory()->create();
 
     auth()->loginUsingId($cart->user_id);
 
@@ -50,7 +50,7 @@ it('returns a cart for a logged in user', function () {
     )->assertStatus(
         status: Http::OK
     );
-});
+})->with('cart');
 
 it('returns a no content status when a guest tries to retrieve their carts', function () {
     get(
@@ -61,11 +61,11 @@ it('returns a no content status when a guest tries to retrieve their carts', fun
 });
 
 /*add products to a cart*/
-it('can add a new product to a cart', function () {
+it('can add a new product to a cart', function (Cart $cart, Variant $variant) {
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
 
-    $cart       = Cart::factory()->create();
-    $variant    = Variant::factory()->create();
+    //$cart       = Cart::factory()->create();
+    //$variant    = Variant::factory()->create();
 
     post(
         uri: route('api:v1:carts:products:store', $cart->uuid),
@@ -81,11 +81,11 @@ it('can add a new product to a cart', function () {
     expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasAddedToCart::class);
 
     //dd(Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent::query()->get());
-});
+})->with('cart','variant');
 
-it('can increase the quantity of an item in the cart', function () {
+it('can increase the quantity of an item in the cart', function (CartItem $item) {
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
-    $item = CartItem::factory()->create(['quantity'=>1]);
+    //$item = CartItem::factory()->create(['quantity'=>1]);
 
     expect($item->quantity)->toEqual(1);
 
@@ -103,11 +103,11 @@ it('can increase the quantity of an item in the cart', function () {
     /*expect(
         CartItem::query()->find($item->id),
     )->quantity->toEqual(4);*/
-});
-it('can decrease the quantity of an item in the cart', function () {
+})->with('cartItem');
+it('can decrease the quantity of an item in the cart', function (CartItem $item) {
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
 
-    $item = CartItem::factory()->create(['quantity'=>3]);
+    //$item = CartItem::factory()->create(['quantity'=>3]);
 
     expect($item->quantity)->toEqual(3);
 
@@ -124,11 +124,11 @@ it('can decrease the quantity of an item in the cart', function () {
     /*expect(
         CartItem::query()->find($item->id),
     )->quantity->toEqual(1);*/
-});
-it('removes an item from the cart when the quantity is zero', function () {
+})->with('3CartItems');
+it('removes an item from the cart when the quantity is zero', function (CartItem $item) {
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
 
-    $item = CartItem::factory()->create(['quantity'=>3]);
+    //$item = CartItem::factory()->create(['quantity'=>3]);
 
     expect($item->quantity)->toEqual(3);
 
@@ -142,7 +142,7 @@ it('removes an item from the cart when the quantity is zero', function () {
 
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
     expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
-});
+})->with('3CartItems');
 it('can remove an item from the cart', function (){
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
     $item = CartItem::factory()->create(['quantity'=>3]);

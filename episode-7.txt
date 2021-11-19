@@ -1,7 +1,7 @@
 RESOURCES
 Bonus: workbench running.
 https://github.com/JustSteveKing/shop
-https://juststeveking.notion.site/Episode-6-3d413656323548aebc6c02b6a95e549c
+https://juststeveking.notion.site/Episode-7-946028b291f0483599d0bfd9f55d4b00
 https://github.com/brendt/phpstorm-photon-them
 https://github.com/timacdonald/json-api
 https://laravelshift.com/phpunit-to-pest-converter
@@ -15,3 +15,9 @@ Episode 7
   -Adding Shipping Info
   -Adding Billing Info
   -Maybe Payments
+
+-PULL REQUEST
+   DATASETS
+      -Create a Datasets Folder - tests/Datasets
+           -Carts, Coupons and Products files
+      -
