@@ -1,0 +1,27 @@
+RESOURCES
+Bonus: workbench running.
+https://github.com/JustSteveKing/shop
+https://juststeveking.notion.site/Episode-8-b2296c1fee9a47e9a42ad3a6439fce7e
+https://github.com/brendt/phpstorm-photon-them
+https://github.com/timacdonald/json-api
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
+https://pestphp.com/
+https://meetup.laravel.com/events
+https://www.youtube.com/watch?v=2UyDBArGLDY
+
+
+Episode 9
+-Continuation of testing all the CartProjectors from Episode 8
+ -All CartProjector
+     src/Domains/Customer/Projectors/CartProjector.php
+     tests/Datasets/CartProjector.php
+     tests/Feature/CartProjectorTest.php
+
+
+
+
+
+
+
+

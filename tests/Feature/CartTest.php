@@ -143,45 +143,21 @@ it('removes an item from the cart when the quantity is zero', function (CartItem
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
     expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
 })->with('3CartItems');
-it('can remove an item from the cart', function (){
+it('can remove an item from the cart', function (CartItem $item): void{
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
-    $item = CartItem::factory()->create(['quantity'=>3]);
+    //$item = CartItem::factory()->create(['quantity'=>3]);
 
     delete(
         uri: route('api:v1:carts:products:delete', [
-            'cart'=> $item->cart->uuid,
-            'item'=> $item->uuid
+               'cart'=> $item->cart->uuid,
+               'item'=> $item->uuid
            ])
     )->assertStatus(Http::ACCEPTED);
 
     //assertDeleted($item);
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
     expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
-});
-it('can apply a coupon to the cart', function (){
-    expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
-
-    $coupon = Coupon::factory()->create();
-
-    $cart = Cart::factory()->create();
-
-    expect($cart)
-        ->reduction
-        ->toEqual(0);
-
-    post(
-        uri: route('api:v1:carts:coupons:store', $cart->uuid),
-        data: ['code' => $coupon->code,]
-    )->assertStatus(Http::ACCEPTED);
-
-    /*expect(
-        Cart::query()->find($cart->id)
-    )->reduction->toEqual($coupon->reduction)->coupon->toEqual($coupon->code);*/
-
-    expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
-    expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(CouponWasApplied::class);
-
-});
+})->with('3CartItems');
 /*when logged in we can create a cart , and it is assigned to our user*/
 /*when not logged in we can create a cart , and the cart id is stored in a session variable*/
 

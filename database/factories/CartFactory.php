@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Domains\Customer\Models\Cart;
+use Domains\Customer\Models\Coupon;
 use Domains\Customer\Models\User;
 use Domains\Customer\States\Statuses\CartStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
+use phpDocumentor\Reflection\Types\ArrayKey;
 
 class CartFactory extends Factory
 {
@@ -28,4 +30,17 @@ class CartFactory extends Factory
             'user_id'       =>  User::factory()->create(),
         ];
     }
+
+    public function withCoupon() :Factory
+    {
+
+            $coupon = Coupon::factory()->create();
+
+            return  $this->state(
+            state: [
+                       'coupon'    =>  $coupon->code,
+                       'reduction' =>  $coupon->reduction
+                   ],
+            );
+  }
 }

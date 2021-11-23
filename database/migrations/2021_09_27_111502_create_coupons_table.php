@@ -11,7 +11,7 @@ return new class() extends Migration {
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->unique();
+            $table->uuid('uuid')->unique();
 
             $table->string('code'); // gimmie my money off
             $table->unsignedInteger('reduction')->default(0); //900
