@@ -1,10 +1,10 @@
 <?php
 
-namespace Domains\Customer\Projectors;
+namespace Domains\Fulfilment\Projectors;
 
 use Database\Factories\OrderFactory;
-use Domains\Customer\Actions\CreateOrder;
-use Domains\Customer\Actions\OrderWasCreated;
+use Domains\Fulfilment\Actions\CreateOrder;
+use Domains\Fulfilment\Events\OrderWasCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class OrderProjector extends Projector

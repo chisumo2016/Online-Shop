@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Customer\States\Statuses;
+namespace Domains\Fulfilment\States\Statuses;
 
 use Spatie\Enum\Laravel\Enum;
 

@@ -11,8 +11,8 @@ use Domains\Customer\Models\Address;
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\Coupon;
 use Domains\Customer\Models\Location;
-use Domains\Customer\Models\Order;
-use Domains\Customer\Models\OrderLine;
+use Domains\Fulfilment\Models\Order;
+use Domains\Fulfilment\Models\OrderLine;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

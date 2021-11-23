@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Domains\Catalog\Models;
 
 use Database\Factories\VariantFactory;
-use Domains\Customer\Models\OrderLine;
+use Domains\Fulfilment\Models\OrderLine;
 use Domains\Customer\States\Statuses\CartStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

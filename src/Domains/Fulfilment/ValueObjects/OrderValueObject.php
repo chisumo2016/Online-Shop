@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Customer\ValueObjects;
+namespace Domains\Fulfilment\ValueObjects;
 
 class OrderValueObject
 {

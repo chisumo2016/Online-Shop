@@ -1,12 +1,12 @@
 <?php
 
-namespace Domains\Customer\Actions;
+namespace Domains\Fulfilment\Actions;
 
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
-use Domains\Customer\Models\Order;
-use Domains\Customer\States\Statuses\OrderStatus;
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfilment\Models\Order;
+use Domains\Fulfilment\States\Statuses\OrderStatus;
+use Domains\Fulfilment\ValueObjects\OrderValueObject;
 
 
 class CreateOrder

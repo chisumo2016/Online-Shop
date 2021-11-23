@@ -1,8 +1,8 @@
 <?php
 declare(strict_types = 1);
 
-use Domains\Customer\Actions\OrderWasCreated;
-use Domains\Customer\Aggregates\OrderAggregate;
+use Domains\Fulfilment\Events\OrderWasCreated;
+use Domains\Fulfilment\Aggregates\OrderAggregate;
 use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
 

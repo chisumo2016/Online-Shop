@@ -1,6 +1,6 @@
 <?php
 
-namespace Domains\Customer\Actions;
+namespace Domains\Fulfilment\Events;
 
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 
