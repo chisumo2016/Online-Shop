@@ -1,0 +1,53 @@
+RESOURCES
+Bonus: workbench running.
+https://github.com/JustSteveKing/shop
+https://juststeveking.notion.site/Episode-8-b2296c1fee9a47e9a42ad3a6439fce7e
+https://github.com/brendt/phpstorm-photon-them
+https://github.com/timacdonald/json-api
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
+https://pestphp.com/
+https://meetup.laravel.com/events
+https://www.youtube.com/watch?v=2UyDBArGLDY
+
+
+Episode 9
+-Continuation of testing all the CartProjectors from Episode 8
+ -All CartProjector
+     src/Domains/Customer/Projectors/CartProjector.php
+     tests/Datasets/CartProjector.php
+     tests/Feature/CartProjectorTest.php
+-After committing all , it's time to work on  CreateOrder.php test
+        1:Create a CreateOrderTest.php
+           tests/Feature/Actions/CreateOrderTest.php
+        2:Create a Dataset called Actions.php
+            tests/Datasets/Actions.php
+        3:Run the Test
+        4:To write some logic for Order Items in  src/Domains/Customer/Actions/CreateOrder.php
+        5:Write expect () test
+        6:Run the test
+        7:Passed the test
+ -Test Endpoints
+     1:Create a folder  Endpoints in Feature Folder
+         tests/Feature/Endpoints/OrdersTest.php
+
+     2:Run the Test
+     3:Failed the test
+          Tests\Feature\OrderTest > it can create an order from a cart for an authenticated user with (Closure Object (...))
+           Expected response status code [201] but received 202.
+           Failed asserting that 201 is identical to 202.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

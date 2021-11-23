@@ -1,0 +1,64 @@
+RESOURCES
+Bonus: workbench running.
+https://github.com/JustSteveKing/shop
+https://juststeveking.notion.site/Episode-8-b2296c1fee9a47e9a42ad3a6439fce7e
+https://github.com/brendt/phpstorm-photon-them
+https://github.com/timacdonald/json-api
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
+https://pestphp.com/
+https://meetup.laravel.com/events
+https://www.youtube.com/watch?v=2UyDBArGLDY
+Turning our cart to an Order
+
+Episode 8
+-Continuing working with an Order
+1:  src/Domains/Customer/Actions/CreateOrder.php
+2:Update the CartProjector.php
+      //update cart total
+   $cart->update([
+       'total' =>  $item->purchasble->retail,
+    ]);
+3:Create the Future Test as CartProjectorTest
+4:write a test
+5:create a datasets  AddedToCart.php
+   tests/Datasets/AddedToCart.php
+6:Add the dataset to CartProjectorTest.php
+7:Run Test
+    ./vendor/bin/pest
+8:Test Failed
+  Domains\Customer\Events\ProductCartEvent::__construct(): Argument #1 ($purchasableID) must be of type int,
+9:Problem  purchasableID: Variant::factory()->create();
+   Solution  purchasableID: Variant::factory()->create()->id,
+10:Build event dd($event);
+11:Trigger method -> passing in the build event
+12:test the custom
+13:Run Test
+    ./vendor/bin/pest
+14:Test Passed
+15:Add expectation and test
+16: Failed Test
+     • Tests\Feature\CartProjectorTest > it can add a product to the cart with (Closure Object (...))
+     Failed asserting that 24507 matches expected 0.
+17:Solution to add the total in DATASETS
+   cartID:         Cart::factory()->create(['total'=>0])->id,
+18:Rerun test and passed
+20 To Test another projector onProductWasRemovedFromCart
+     `can remove a product from the cart`
+21: Add the dataset to removeFromCart
+22:Install Ray
+  composer require spatie/laravel-ray
+
+23:Test all the projectorTest and CartProjectors
+    DataSets/CartProjector.php
+    CartProjectorTest.php
+    Projectors/CartProjector.php
+
+
+
+
+
+
+
+
+

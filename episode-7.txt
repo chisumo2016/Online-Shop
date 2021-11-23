@@ -1,7 +1,7 @@
 RESOURCES
 Bonus: workbench running.
 https://github.com/JustSteveKing/shop
-https://juststeveking.notion.site/Episode-6-3d413656323548aebc6c02b6a95e549c
+https://juststeveking.notion.site/Episode-7-946028b291f0483599d0bfd9f55d4b00
 https://github.com/brendt/phpstorm-photon-them
 https://github.com/timacdonald/json-api
 https://laravelshift.com/phpunit-to-pest-converter
@@ -15,3 +15,253 @@ Episode 7
   -Adding Shipping Info
   -Adding Billing Info
   -Maybe Payments
+
+-PULL REQUEST
+   DATASETS
+      -Create a Datasets Folder - tests/Datasets
+           -Carts, Coupons and Products files
+      -Remove the   //$item = CartItem::factory()->create(['quantity'=>3]);
+      -Pass the object into method (Cart $cart) (CartItem $item)
+
+REMOVING A COUPON FROM THE CART
+  -create a api route
+-change our migration to use uuid instead of key
+-run php artisan migrate:fresh --seed
+-Create a controller   DeleteController
+   php artisan make:controller Api\\V1\\Carts\\Coupons\\DeleteController --invokable
+-Add pass arg inside
+-Create a new feature test called CouponTest
+    tests/Feature/CouponTest.php
+-write  functionality of Coupontest
+-Run the test
+   ./vendor/bin/pest
+-Fail The test
+    • Tests\Feature\CouponTest > it can remove a coupon from the cart with (Closure Object (...)) / (Closure Object (...))
+     Expected response status code [202] but received 200.
+     Failed asserting that 202 is identical to 200.
+-Write the logic in controller, return reponse
+-Run the test again
+   ./vendor/bin/pest
+-Fail the test
+  • Tests\Feature\CouponTest > it can remove a coupon from the cart with (Closure Object (...)) / (Closure Object (...))
+    Failed asserting that 3035 is null.
+-Add missign logic into DeleteController
+-Run the test again
+-Test Fail again
+    • Tests\Feature\CouponTest > it can remove a coupon from the cart with (Closure Object (...)) / (Closure Object (...))
+     Expected response status code [202] but received 500.
+     The following exception occurred during the request:
+     PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'reduction' cannot be null
+-Soln :Set the reduction back to 0 in update of DeleteController
+     Also in test change reduction to coupon
+-Run the test again
+    ./vendor/bin/pest
+-Test Passed
+
+WE NEED TO REFACTOR INTO OUR DATASETS
+ -Open carts datasets and write the logic
+    dataset('cartWithCoupon',
+            [function () {
+                $coupon = Coupon::factory()->create();
+
+                return Cart::factory()->create([
+                   'coupon' => $coupon->code,
+                   'reduction' => $coupon->reduction,
+               ]);
+            }]
+    );
+-We need top refactor our code from DeleteController
+   -Create a Actions RemoveCouponFromCart
+-we gonna pass Cart $cart
+-Add the Action into DeleteController and removeUpdate
+   $cart->update([
+              'coupon' => null,
+              'reduction'=>0
+    ]);
+     and add
+
+      RemoveCouponFromCart::handle(
+                 cart: $cart
+      )
+- add the update into RemoveCouponFromCart -Actions
+     $cart->update([
+                  'coupon' => null,
+                  'reduction'=>0
+        ]);
+-Run the Test
+   ./vendor/bin/pest
+-Test PASSED
+
+ADDING SHIPPING Info
+  ORDERS
+-This is our cart ,now we want our order .here is some information
+   -You can be a guest
+   -You can be authenticated
+-Take our payment and turn it to an order
+-Turn cart to an order
+-We need to convert cart to an order
+-Working on checkout
+STEPS
+    1:Create an api routes for our orders
+       Route::post('/', App\Http\Controllers\Api\V1\Orders\StoreController::class)->name('store');
+    2: Add addition status as decline()
+        src/Domains/Customer/States/Statuses/OrderStatus.php
+    3:Create StoreController
+       php artisan make:controller Api\\V1\\Orders\\StoreController --invokable
+    4:Create StoreRequest for an Order
+        php artisan make:request  Api\\V1\\Order\\StoreRequest
+    5:Pass the StoreRequest into  StoreController
+    6:Write our test
+       /*
+            * create a cart
+            * expect that  there is no orders in the database
+            * send request to endpoint to create order from cart
+            * expect that  there is now an order in the database
+            */
+                -expect that  there is no orders in the database
+                  expect(Order::query()->get())->toEqual(0);
+   7: Run the test
+       ./vendor/bin/pest
+   8: Test Fail
+        ⨯ it can create an order from a cart with (Closure Object (...))
+
+         • Tests\Feature\OrderTest > it can create an order from a cart with (Closure Object (...))
+         Illuminate\Database\Eloquent\Collection Object (...) does not match expected type "integer".
+  9: Problem was in get() ,should be count
+       expect(Order::query()->count())->toEqual(0);
+  10 : Run the test
+         ./vendor/bin/pest
+ 11: Test Passed
+12: send request to endpoint to create order from cart
+      php artisan route:list --columns=uri,name,method
+      post(
+              uri: route('api:v1:orders:store'),
+              data: []
+         );
+13: expect that  there is now an order in the database
+14 : Run the test
+         ./vendor/bin/pest
+15: Test Failed
+    • Tests\Feature\OrderTest > it can create an order from a cart with (Closure Object (...))
+      Expected response status code [201] but received 302.
+
+      The following errors occurred during the request:
+
+      The code field is required.
+
+      Failed asserting that 201 is identical to 302.
+16: Problem we need to focus  storeRequest and StoreController
+17: Add the StoreRequest into StoreController of an Order
+18: Run the Test
+    ./vendor/bin/pest
+19:Test Fail
+  • Tests\Feature\OrderTest > it can create an order from a cart with (Closure Object (...))
+    Expected response status code [201] but received 200.
+    Failed asserting that 201 is identical to 200.
+20: We need to validate into our StoreRequest
+21:Run the test again
+    ./vendor/bin/pest
+22:Test Failed
+    • Tests\Feature\OrderTest > it can create an order from a cart with (Closure Object (...))
+     Expected response status code [201] but received 200.
+     Failed asserting that 201 is identical to 200.
+23:Solution to work on StoreController
+     /**
+       * create the order
+            $order = Order::query()->create([]);
+       * any notification
+            if (auth()->check()) {
+                //send a notification to the user
+            }
+       * return response
+           return new JsonResponse(
+            data: $order,
+            status: Http::CREATED
+        );
+       */
+24:Run the test again
+    ./vendor/bin/pest
+25: Passed the test
+26: We need to add more field in the test
+27:Run the test again
+       ./vendor/bin/pest
+
+28:  Failed the test
+        • Tests\Feature\OrderTest > it can create an order from a cart for an unauthenticated user with (Closure Object (...))
+         Failed asserting that null matches expected 1.
+29:Problem of failing is on shippingId
+   expect(Order::query()->first())->shippingId->toEqual($location->id);
+3O:Solution
+    expect(Order::query()->first()->shipping_id)->toEqual($location->id);
+31:Test Passed
+32:We can add another expectation
+33:Run the Test
+34:Passed the Test
+35:Write another test `can create an order from a cart for an authenticated user`
+36:Run the Test
+37:Passed the Tests\
+38:We need to convert into event Sourcing
+     1:Change this the expectation into EloquentStoreEvent
+         expect(Order::query()->count())->toEqual(0);
+          into
+           expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 0);
+    2:Create a Class EloquentStoredEvent
+    3: Change the Expectation into our test
+                expect(Order::query()->count())->toEqual(1);
+                expect(Order::query()->first()->shipping_id)->toEqual($location->id);
+                expect(Order::query()->first()->user_id)->toEqual(auth()->id());
+
+                to Look Like
+                expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);
+                expect(EloquentStoredEvent::query()->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
+39: Run the test again
+           ./vendor/bin/pest
+
+40: Failed the test
+        • Tests\Feature\OrderTest > it can create an order from a cart for an authenticated user with (Closure Object (...))
+            Failed asserting that actual size 0 matches expected size 1.
+41: Reason no EloquentStoredEvent
+42:We need to turn the storeController to an Event
+    1:create a OrderWasCreated class extends shouldBeStored-Spatie
+        A: Create a Constructor
+    2:Create an Aggregate class called OrderAggregate extends Spatie\EventSourcing\AggregateRoots\AggregateRoot
+    3:Call the OrderAggregate::retrieve() in StoreController
+
+43:Run Test
+   ./vendor/bin/pest
+44:Test Failed
+     • Tests\Feature\OrderTest > it can create an order from a cart for an authenticated user with (Closure Object (...))
+      Expected response status code [201] but received 500.
+
+      The following exception occurred during the request:
+45: Problem   ErrorException: Undefined variable $order
+46: We need tpo change our JResponse
+        return new JsonResponse(
+             data: $order,
+             status: Http::CREATED
+        );
+
+    TO
+    return new Response(
+         content: null,
+         status: Http::CREATED
+   );
+47: Run the Test
+48:Passed
+49:We need top create a OrderAggregateTest.php
+     -Create a DataSet for Location
+     -Write a test for OrderAggregateTes `can create an order for an unauthenticated user`
+50:Run Test
+     ./vendor/bin/pest
+51: Passed the Test
+52:We need to create a project to persist the information into database
+     1:To create a OrderProjector class
+         extends Spatie\EventSourcing\EventHandlers\Projectors\Projector
+     2:Create  a value Object Class inside ValueObjects and pass the Constructor
+     3:Create a OrderFactory
+     4:Create an Actions CreateOrder
+     5:Go to storeController and move all logic into
+          src/Domains/Customer/Actions/CreateOrder.php
+     6:Go to EventSourcingServiceProvider  add OrderProjector::class
+     7:Run the Test
+     8:Passed the Test
