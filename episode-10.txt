@@ -10,6 +10,7 @@ https://pestphp.com/
 https://meetup.laravel.com/events
 https://www.youtube.com/watch?v=2UyDBArGLDY
 
+NB:Moving Order codes into the Fulfilment domain folder
 
 Episode 10
 - We will be using Stripe
