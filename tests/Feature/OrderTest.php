@@ -26,7 +26,7 @@ it('can create an order from a cart for an unauthenticated user', function (Cart
                'shipping'=>$location->id,
                'billing'=> $location->id,
              ]
-    )->assertStatus(Http::CREATED);
+    )->assertStatus(Http::ACCEPTED);
 
     //expect(Order::query()->count())->toEqual(1);
     //expect(Order::query()->first()->shipping_id)->toEqual($location->id);
@@ -51,7 +51,7 @@ it('can create an order from a cart for an authenticated user', function (CartIt
                  'shipping' => $location->id,
                  'billing' => $location->id,
              ]
-    )->assertStatus(Http::CREATED);
+    )->assertStatus(Http::ACCEPTED);
 
 
     expect(EloquentStoredEvent::query()->get())->toHaveCount(count: 1);

@@ -25,7 +25,7 @@ class OrderFactory extends Factory
             'number'        => $this->faker->bothify(string: 'ORD-####-####-####'),
             'state'         => $state,
             'coupon'        =>  $useCoupon ? $this->faker->imei() : null,
-            'total'         =>  $this->faker->numberBetween(100, 100000),
+            'total'         =>  $this->faker->numberBetween(10000, 100000),
             'reduction'     =>  $useCoupon ? $this->faker->numberBetween(250, 2500) : 0,
             'user_id'       =>  User::factory()->create(),
             'shipping_id'   =>  Location::factory()->create(),
