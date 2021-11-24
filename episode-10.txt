@@ -1,0 +1,35 @@
+RESOURCES
+Bonus: workbench running.
+https://github.com/JustSteveKing/shop
+https://juststeveking.notion.site/Episode-8-b2296c1fee9a47e9a42ad3a6439fce7e
+https://github.com/brendt/phpstorm-photon-them
+https://github.com/timacdonald/json-api
+https://laravelshift.com/phpunit-to-pest-converter
+https://laravelshift.com/workbench
+https://pestphp.com/
+https://meetup.laravel.com/events
+https://www.youtube.com/watch?v=2UyDBArGLDY
+
+NB:Moving Order codes into the Fulfilment domain folder
+
+Episode 10
+- We will be using Stripe
+    -We will be using Stripe as our payment provider. We will not be using Cashier, or any payment library other than Stripe SDK.
+     To create a payment for an order, the front end/mobile app/interface whatever will talk to the API, will talk to stripe, create a payment intent - and then this will be used to track payments going forward.
+     This payment intent will need to be stored on the server side - so that we can track progress.
+       Order:
+         attributes:
+           id: int
+           ...
+           intent: string
+
+           Payment:
+             attributes:
+               id: int
+               ...
+               intent: string
+
+
+
+
+

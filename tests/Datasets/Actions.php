@@ -4,7 +4,7 @@ use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
 use Domains\Customer\Models\User;
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfilment\ValueObjects\OrderValueObject;
 
 dataset('OrderValueObject', [
     fn() => new OrderValueObject(

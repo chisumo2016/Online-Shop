@@ -37,8 +37,13 @@ Episode 9
            Expected response status code [201] but received 202.
            Failed asserting that 201 is identical to 202.
 
+PAYMENTS
+  -We're going to use https://stripe.com/gb
+     https://github.com/stripe-samples
 
-
+NB: Moving Order codes into the Fulfilment domain folder
+-Create a Directory called Support
+     src/Domains/Fulfilment/Support
 
 
 
