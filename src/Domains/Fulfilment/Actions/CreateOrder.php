@@ -25,11 +25,13 @@ class CreateOrder
                    'number'        => OrderNumberGenerator::generate() ,
                    'state'          => OrderStatus::pending()->label,
                    'coupon'         => $cart->coupon,
+                   'intent'         => $object->intent,
                    'total'          => 1, //ask
                    'reduction'      => $cart->reduction,
                    'user_id'        =>is_null($object->email) ? $object->user : null,
                    'shipping_id'    => $object->shipping,
                    'billing_id'     => $object->billing,
+
               ]);
 
             //Order Items

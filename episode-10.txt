@@ -29,6 +29,68 @@ Episode 10
                ...
                intent: string
 
+-Add  a new column to our order Migration
+   $table->string('intent_id')->nullable()->unique();
+-intent ID is the payment intent from stripe
+-Add the intent_id on Order Model
+-Migrate and refresh
+-Run Test
+-Add the $intent on  src/Domains/Fulfilment/ValueObjects/OrderValueObject.php
+    public null|string $intent,
+-Add on Factories of src/Domains/Fulfilment/Factories/OrderFactory.php
+     intent:   $attributes['intent'],
+-Run Test again
+-Failed Test
+     Too few arguments to function Domains\Fulfilment\ValueObjects\OrderValueObject::__construct(),
+-Solution
+    Add the  intent: null in tests/Datasets/Actions.php
+-Run the Test and Passed
+
+-To install Stripe/Cli
+   brew install stripe/stripe-cli/stripe
+     run `stripe login` first.
+     stripe
+     stripe trigger
+     payment_intent.succeeded
+     stripe trigger  payment_intent.succeeded
+     stripe listen --forward-to shop-app.test/api/v1/stripe/hooks
+-Create a api  for our webhook
+-Create WebhookController
+   php artisan make:controller Api\\V1\\Orders\\StripeWebhookController --invokable
+-https://stripe.com/docs/webhooks/signatures#verify-official-libraries
+    composer search stripe
+    composer require stripe/stripe-php
+-Create Middleware   SignatureValidationMiddleware
+       php artisan make:middleware Stripe\\Signature\\SignatureValidationMiddleware
+-Create StripeServiceProvider
+   php artisan make:provider  StripeServiceProvider
+-We need to load the Middleware IN the  StripeServiceProvider
+-Hook into SignatureValidationMiddleware
+    https://stripe.com/docs/webhooks/signatures#verify-official-libraries
+-Register the middleware in the kernel
+-Apply the middleware in api route
+-Register the services in services.php
+
+-Testing
+https://github.com/spatie/laravel-stripe-webhooks/blob/main/tests/IntegrationTest.php
+https://github.com/spatie/laravel-stripe-webhooks/blob/main/tests/TestCase.php
+-Write a test to  webhookTest
+- php artisan route:list --compact
+-Create Job
+   php artisan make:job Stripe\\ProcessPaymentIntent
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

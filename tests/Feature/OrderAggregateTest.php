@@ -15,7 +15,7 @@ it('can create an order for an unauthenticated user', function (CartItem $item, 
                         shipping: $location->id,
                         billing:  $location->id,
                         user:     null,
-                        //intent: '12345',
+                        intent: '12345',
                     ),
         )->when(
             callable: function (OrderAggregate $aggregate) use($item, $location) {
@@ -25,7 +25,7 @@ it('can create an order for an unauthenticated user', function (CartItem $item, 
                     billing:  $location->id,
                     user:     null,
                     email:    'bchisumo74@gmail.com',
-                    //intent: '12345',
+                    intent: '12345',
                 );
             },
         )->assertRecorded(
@@ -35,7 +35,7 @@ it('can create an order for an unauthenticated user', function (CartItem $item, 
                 shipping: $location->id,
                 billing:  $location->id,
                 user:     null,
-               // intent:   '12345',
+               intent:   '12345',
             )
         );
 })->with('3CartItems', 'location');
@@ -48,7 +48,7 @@ it('can create an order for an authenticated user', function (CartItem $item, Lo
                         shipping: $location->id,
                         billing:  $location->id,
                         user:     auth()->id(),
-                    //intent: '12345',
+                        intent: '12345',
                     ),
         )->when(
             callable: function (OrderAggregate $aggregate) use($item, $location) {
@@ -58,7 +58,7 @@ it('can create an order for an authenticated user', function (CartItem $item, Lo
                     billing:  $location->id,
                     user:     auth()->id(),
                     email:    'bchisumo74@gmail.com',
-                //intent: '12345',
+                    intent: '12345',
                 );
             },
         )->assertRecorded(
@@ -68,7 +68,7 @@ it('can create an order for an authenticated user', function (CartItem $item, Lo
                                 shipping: $location->id,
                                 billing:  $location->id,
                                 user:     null,
-                            // intent:   '12345',
+                                 intent:   '12345',
                             )
         );
 })->with('3CartItems', 'location');

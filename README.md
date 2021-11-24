@@ -3,7 +3,7 @@
 
 - [ ] Whishlist
 - [ ] Payments
-- [ ] Order Number to be refactor
+- [ ] Order Number to be refactored
 
 
 
