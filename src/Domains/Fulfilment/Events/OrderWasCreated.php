@@ -14,5 +14,6 @@ class OrderWasCreated extends ShouldBeStored
        public null|int $user,
        public string $intent,
 
+
    ){}
 }

@@ -1,10 +1,14 @@
 <?php
 declare(strict_types = 1);
 
+use Domains\Customer\Models\User;
+use Domains\Fulfilment\Events\OrderStateWasUpdated;
 use Domains\Fulfilment\Events\OrderWasCreated;
 use Domains\Fulfilment\Aggregates\OrderAggregate;
 use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
+use Domains\Fulfilment\Models\Order;
+use Domains\Fulfilment\States\Statuses\OrderStatus;
 
 it('can create an order for an unauthenticated user', function (CartItem $item, Location $location) {
     OrderAggregate::fake()
@@ -74,8 +78,7 @@ it('can create an order for an authenticated user', function (CartItem $item, Lo
 })->with('3CartItems', 'location');
 
 
-/*
-it('can update an orders status', function () {
+it('can update an orders state', function () {
     auth()->login(User::factory()->create());
 
     $order = Order::factory()->create();
@@ -90,15 +93,14 @@ it('can update an orders status', function () {
     )->when(
         callable: function (OrderAggregate $aggregate) use ($order) {
             $aggregate->updateState(
-                id: $order->id,
+                id:   $order->id,
                 state: OrderStatus::completed()->value,
             );
         },
     )->assertRecorded(
         expectedEvents: new OrderStateWasUpdated(
-                            id: $order->id,
-                            state: OrderStatus::completed()->value,
-                        ),
+            id: $order->id,
+            state: OrderStatus::completed()->value,
+        ),
     );
 });
-*/

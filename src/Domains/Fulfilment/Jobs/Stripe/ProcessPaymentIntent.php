@@ -31,6 +31,7 @@ class ProcessPaymentIntent implements ShouldQueue
     public function handle(): void
     {
 
+
         Log::info(
             message: 'Process payment intent from a webhook job',
             context: [
@@ -39,9 +40,36 @@ class ProcessPaymentIntent implements ShouldQueue
              ],
         );
 
-        //Get the order aggreagte
+        //look up an order by intent id based off the object id
+         $order = Order::query()->where('intent_id', $this->object->id)->first();
+
+         //create a map of stripe webhooks events to order statusses
+        $state = RetrieveOrderStateFromPaymentIntent::handle($this->object);
+
+
+         //Using the order Aggregate retrieve based on the order uuid, a call the  updateOrderStatus method
+        OrderAggregate::retrieve(
+            uuid: $order->uuid,
+        )->updateState(
+            id: $order->id,
+            state: $state->value,
+        )->persist();
+
+
+        //Get the order aggregate
         //update the status
         //react tp send a notification to the end user
 
     }
 }
+
+/*
+ *
+ * match ($this->object->object) {
+            'succeeded'     => OrderStatus::completed(),
+            'failed'        => OrderStatus::declined(),
+            'refunded'      => OrderStatus::refunded(),
+            default         => OrderStatus::pending(),
+
+          };
+ */

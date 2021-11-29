@@ -14,9 +14,17 @@ NB:Moving Order codes into the Fulfilment domain folder
 
 Episode 11
 Testing
--Always do composer update
+-Always run composer update
+-Testing the StripeWehooks
+   `passes the middleware check for a valid signature`
 
-
+-Write a tests OrderAggregateTest
+  'can update an orders status'
+-Create Events OrderStateWasUpdated
+   src/Domains/Fulfilment/Events/OrderStateWasUpdated.php
+  extends to Spatie\EventSourcing\StoredEvents\ShouldBeStored
+-create OrderProjectorTest  tests/Feature/OrderProjectorTest.php
+-Create a Datasets OrderStatuses
 
 
 
