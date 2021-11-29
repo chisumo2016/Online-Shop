@@ -29,6 +29,7 @@ class StoreController extends Controller
             billing:  $request->get('billing'),
             user:     auth()->check() ? auth()->id(): null,
             email:    auth()->guest()? $request->get('email') : null,
+            intent:  $request->get('intent'),
         )->persist();
 
          return new Response(

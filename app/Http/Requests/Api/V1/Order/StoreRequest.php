@@ -37,6 +37,12 @@ class StoreRequest extends FormRequest
                 'int',
                 'exists:locations,id',
             ],
+            //payment with stripe
+            'intent' => [
+                'required',
+                'string',
+
+            ],
         ];
     }
 }

@@ -10,5 +10,6 @@ class OrderValueObject
        public  int $shipping,
        public  int $billing,
        public null|int $user,
+       public null|string $intent,
    ){}
 }

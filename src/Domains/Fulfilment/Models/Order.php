@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Domains\Fulfilment\Models;
 
+
 use Database\Factories\OrderFactory;
 use Domains\Customer\Models\Location;
 use Domains\Fulfilment\Models\OrderLine;
 use Domains\Customer\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,7 @@ class Order extends Model
         'number',
         'state',
         'coupon',
+        'intent_id',
         'total',
         'reduction',
         'user_id',
@@ -70,7 +72,7 @@ class Order extends Model
         );
     }
 
-    protected static function newFactory(): Factory
+    protected static function newFactory(): \Database\Factories\OrderFactory
     {
         return  OrderFactory::new();
     }

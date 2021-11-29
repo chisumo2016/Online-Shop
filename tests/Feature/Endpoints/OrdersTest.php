@@ -26,6 +26,8 @@ it('can create an order from a cart using the API when not logged in', function 
                  'email'      =>    'bchisumo74@gmail.com',
                  'shipping'   =>    $location->id,
                  'billing'    =>    $location->id,
+                 'intent'    =>    '12345',
+
              ],
     )->assertStatus(Http::ACCEPTED); //ACCEPTED
 
@@ -50,6 +52,7 @@ it('can create an order from a cart using the API when logged in', function (){
                  'email'      =>    'bchisumo74@gmail.com',
                  'shipping'   =>    $location->id,
                  'billing'    =>    $location->id,
+                 'intent'    =>    '12345',
              ],
     )->assertStatus(Http::ACCEPTED); //ACCEPTED
 
