@@ -26,7 +26,30 @@ Testing
 -create OrderProjectorTest  tests/Feature/OrderProjectorTest.php
 -Create a Datasets OrderStatuses
 
+WISHLIST
+ php artisan make:model Wishlist -mf
+ -Move the wishlist Model into Domain
+-Fill the model , migration and FACTORY
+-CREATE - create_product_wishlist_table  or 2021_11_29_131750_create_variant_wishlist_table
+    php artisan make:migration create_product_wishlist_table --create=product_wishlist
+-Make relationships for all models
+-Write the Feature Test for Wishlist WishlistTest.php
+     -Start writing a test for the Wishlist
+     -write route
+     -create a controller
+        php artisan make:controller Api\\V1\\Wishlists\\IndexController --invokable
 
+  • Tests\Feature\WishlistTest > it can list all wishlists for a user
+  Invalid JSON was returned from the route.
+      nothing passed into controller
+
+
+
+
+
+ console
+ localStorage
+ localStorage.setItem('wishlist', JSON.stringify([wishlist : ['uuid']));
 
 
 

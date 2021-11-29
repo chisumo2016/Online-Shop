@@ -6,6 +6,7 @@ namespace Domains\Catalog\Models;
 
 use Database\Factories\ProductFactory;
 use Domains\Catalog\Models\Builders\ProductBuilder;
+use Domains\Customer\Models\Wishlist;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -60,6 +61,7 @@ class Product extends Model
             foreignKey: 'product_id'
         );
     }
+
 
     public function newEloquentBuilder($query): Builder
     {

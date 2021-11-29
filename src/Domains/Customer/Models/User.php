@@ -76,6 +76,14 @@ class User extends Authenticatable
         );
     }
 
+    public function  wishlists(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->HasMany(
+            related: Wishlist::class,
+            foreignKey: 'user_id'
+        );
+    }
+
     protected static function newFactory(): Factory
     {
         return  UserFactory::new();

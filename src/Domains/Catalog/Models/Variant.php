@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domains\Catalog\Models;
 
 use Database\Factories\VariantFactory;
+use Domains\Customer\Models\Wishlist;
 use Domains\Fulfilment\Models\OrderLine;
 use Domains\Customer\States\Statuses\CartStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -61,6 +62,14 @@ class Variant extends Model
             name: 'purchasable',
         );
     }
+    public function  wishlists(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return  $this->belongsToMany(
+            related:  Wishlist::class,
+            table: 'variant_wishlist'
+        );
+    }
+
 
     protected static function newFactory(): Factory
     {
